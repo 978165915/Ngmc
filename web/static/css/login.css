@@ -1,0 +1,10 @@
+
+.layui-btn-width{
+	width: 339px;
+	height: 54px;
+	background-color: #189F92;
+	color: white;
+}
+.layui-btn-width:hover{
+	color: white;
+}
