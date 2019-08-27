@@ -15,12 +15,10 @@ public class UserDaoImpl extends DBUtil implements UserDao {
 	
 	@Override
 	public int save(User user) throws SQLException {
-		String sql="insert into NGMC_USER (user_name, user_password, nick_name, rights, role_id, last_login, ip, user_status, skin, email, user_number, phone) " + 
+		String sql="insert into electronic_emporium_userinfo (user_name, user_password, nick_name, rights, role_id, last_login, ip, user_status, skin, email, user_number, phone) " +
 				"values ( ?, ?, ?, ?, ?, null, ?, ?, ?, ?, ?, ?)";
 		return executeUpdate(sql,user.getUser_name(),MD5.MD5Encode(user.getUser_password()),
-						user.getNick_name(),user.getRights(),user.getRole_id(),
-						user.getIp(),user.getStatus(),user.getSkin(),user.getEmail(),user.getUser_number(),
-						user.getPhone());
+						user.getEmail(),user.getPhone());
 	}
 
 	@Override
@@ -36,17 +34,8 @@ public class UserDaoImpl extends DBUtil implements UserDao {
 				user = new User();
 				user.setUser_id(rs.getInt("user_id"));
 				user.setUser_name(rs.getString("user_name"));
-				user.setNick_name(rs.getString("nick_name"));
-				user.setRights(rs.getString("rights"));
-				user.setRole_id(rs.getString("role_id"));
-				user.setLast_login(rs.getString("last_login"));
-				user.setIp(rs.getString("ip"));
-				user.setStatus(rs.getString("user_status"));
-				user.setSkin(rs.getString("skin"));
-				user.setEmail(rs.getString("email"));
-				user.setUser_number(rs.getString("user_number"));
+				user.setEmail(rs.getString("email"));;
 				user.setPhone(rs.getString("phone"));
-				user.setMan_buyer_id(rs.getInt("man_buyer_id"));
 			} 
 		} finally {
 			closeAll(conn, pstmt, rs);
@@ -68,17 +57,8 @@ public class UserDaoImpl extends DBUtil implements UserDao {
 				user = new User();
 				user.setUser_id(rs.getInt("user_id"));
 				user.setUser_name(rs.getString("user_name"));
-				user.setNick_name(rs.getString("nick_name"));
-				user.setRights(rs.getString("rights"));
-				user.setRole_id(rs.getString("role_id"));
-				user.setLast_login(rs.getString("last_login"));
-				user.setIp(rs.getString("ip"));
-				user.setStatus(rs.getString("user_status"));
-				user.setSkin(rs.getString("skin"));
 				user.setEmail(rs.getString("email"));
-				user.setUser_number(rs.getString("user_number"));
 				user.setPhone(rs.getString("phone"));
-				user.setMan_buyer_id(rs.getInt("man_buyer_id"));
 				userList.add(user);
 			}
 		} finally {
@@ -101,17 +81,8 @@ public class UserDaoImpl extends DBUtil implements UserDao {
                 user = new User();
                 user.setUser_id(rs.getInt("user_id"));
                 user.setUser_name(rs.getString("user_name"));
-                user.setNick_name(rs.getString("nick_name"));
-                user.setRights(rs.getString("rights"));
-                user.setRole_id(rs.getString("role_id"));
-                user.setLast_login(rs.getString("last_login"));
-                user.setIp(rs.getString("ip"));
-                user.setStatus(rs.getString("user_status"));
-                user.setSkin(rs.getString("skin"));
                 user.setEmail(rs.getString("email"));
-                user.setUser_number(rs.getString("user_number"));
                 user.setPhone(rs.getString("phone"));
-                user.setMan_buyer_id(rs.getInt("man_buyer_id"));
                 userList.add(user);
             }
         } finally {
