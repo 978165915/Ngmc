@@ -58,12 +58,9 @@ public class UserServlet extends HttpServlet {
 			//执行注册
 			String  username =request.getParameter("userName");
 			String pwd =request.getParameter("password");
-			String registerName=request.getParameter("registerName");
 			String email =request.getParameter("email");
 			String phone=request.getParameter("phone");
-			String roleID=request.getParameter("role");
-			String skin=request.getParameter("registerSkin");
-			User user =	new User(username,pwd,registerName,roleID,skin,email,phone);
+			User user =	new User(username,pwd,email,phone);
 
 			if(userbiz.register(user)>0) {//登录成功
 				response.sendRedirect(request.getContextPath()+"/index.html");
