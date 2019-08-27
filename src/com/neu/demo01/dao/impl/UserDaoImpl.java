@@ -15,17 +15,16 @@ public class UserDaoImpl extends DBUtil implements UserDao {
 	
 	@Override
 	public int save(User user) throws SQLException {
-		String sql="insert into electronic_emporium_userinfo (user_name, user_password, nick_name, rights, role_id, last_login, ip, user_status, skin, email, user_number, phone) " +
-				"values ( ?, ?, ?, ?, ?, null, ?, ?, ?, ?, ?, ?)";
+		String sql="insert into userinfo(user_name, user_password, email, phone) " +
+				"values ( ?, ?, ?, ?)";
 		return executeUpdate(sql,user.getUser_name(),MD5.MD5Encode(user.getUser_password()),
 						user.getEmail(),user.getPhone());
 	}
 
 	@Override
 	public User getUserByUsername(String username,String pwd) throws SQLException {
-		String sql="select user_id, user_name, user_password, nick_name, rights, role_id, "
-				+ "last_login, ip, user_status, skin, email, user_number, phone, man_buyer_id"
-				+ " from ngmc_user where user_name=? and user_password=?";
+		String sql="select user_id, user_name, user_password，email, phone"
+				+ " from userinfo where user_name=? and user_password=?";
 		User user;
 		try {
 			rs = executeQuery(sql, username,MD5.MD5Encode(pwd));
@@ -46,9 +45,8 @@ public class UserDaoImpl extends DBUtil implements UserDao {
 	@Override
 	public List<User> getUserList() throws SQLException {
 		List<User>userList=new ArrayList<>();
-		String sql="select user_id, user_name, user_password, nick_name, rights, role_id, "
-				+ "last_login, ip, user_status, skin, email, user_number, phone, man_buyer_id"
-				+ " from ngmc_user";
+		String sql="select user_id, user_name, user_password, email, phone"
+				+ " from userinfo";
 		User user;
 		try {
 			rs = executeQuery(sql);
@@ -70,9 +68,8 @@ public class UserDaoImpl extends DBUtil implements UserDao {
     @Override
     public List<User> getUserListByPage(int currentPage, int pageSize) throws SQLException {
         List<User>userList=new ArrayList<>();
-        String sql="select user_id, user_name, user_password, nick_name, rights, role_id, "
-                + "last_login, ip, user_status, skin, email, user_number, phone, man_buyer_id"
-                + " from ngmc_user limit ?,?";
+        String sql="select user_id, user_name, user_password, email, phone"
+                + " from userinfo limit ?,?";
         User user;
         try {
             rs = executeQuery(sql,(currentPage-1)*pageSize,pageSize);
@@ -94,7 +91,7 @@ public class UserDaoImpl extends DBUtil implements UserDao {
     @Override
     public int getUserCount() throws SQLException {
 	    int count=0;
-	    String sql="SELECT COUNT(user_id) FROM ngmc_user";
+	    String sql="SELECT COUNT(user_id) FROM userinfo";
 	    try{
             rs=executeQuery(sql,null);
             if(rs.next()){
