@@ -10,12 +10,12 @@ import com.neu.demo01.util.DBUtil;
 import com.neu.demo01.util.MD5;
 
 
-public class UserDaoImpl extends DBUtil implements UserDao {
+public class  UserDaoImpl extends DBUtil implements UserDao {
 	
 	
 	@Override
 	public int save(User user) throws SQLException {
-		String sql="insert into userinfo(user_name, user_password, email, phone) " +
+		String sql="insert into userinfo(username, password, email, phone) " +
 				"values ( ?, ?, ?, ?)";
 		return executeUpdate(sql,user.getUser_name(),MD5.MD5Encode(user.getUser_password()),
 						user.getEmail(),user.getPhone());
@@ -23,16 +23,16 @@ public class UserDaoImpl extends DBUtil implements UserDao {
 
 	@Override
 	public User getUserByUsername(String username,String pwd) throws SQLException {
-		String sql="select user_id, user_name, user_password，email, phone"
-				+ " from userinfo where user_name=? and user_password=?";
+		String sql="select id, username, password，email, phone"
+				+ " from userinfo where username=? and password=?";
 		User user;
 		try {
 			rs = executeQuery(sql, username,MD5.MD5Encode(pwd));
 			user = null;
 			if (rs.next()) {
 				user = new User();
-				user.setUser_id(rs.getInt("user_id"));
-				user.setUser_name(rs.getString("user_name"));
+				user.setUser_id(rs.getInt("id"));
+				user.setUser_name(rs.getString("username"));
 				user.setEmail(rs.getString("email"));;
 				user.setPhone(rs.getString("phone"));
 			} 
@@ -45,7 +45,7 @@ public class UserDaoImpl extends DBUtil implements UserDao {
 	@Override
 	public List<User> getUserList() throws SQLException {
 		List<User>userList=new ArrayList<>();
-		String sql="select user_id, user_name, user_password, email, phone"
+		String sql="select id, username, password, email, phone"
 				+ " from userinfo";
 		User user;
 		try {
@@ -53,8 +53,8 @@ public class UserDaoImpl extends DBUtil implements UserDao {
 			user = null;
 			while (rs.next()) {
 				user = new User();
-				user.setUser_id(rs.getInt("user_id"));
-				user.setUser_name(rs.getString("user_name"));
+				user.setUser_id(rs.getInt("id"));
+				user.setUser_name(rs.getString("username"));
 				user.setEmail(rs.getString("email"));
 				user.setPhone(rs.getString("phone"));
 				userList.add(user);
