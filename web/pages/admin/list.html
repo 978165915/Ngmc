@@ -75,16 +75,18 @@ layui.use('table', function(){
 		cellMinWidth: 80,
 		skin: 'line',
 		cols: [[
-			{field: 'id',title: 'ID',hide:true}
-			,{field: 'title',title: '标题'}
-			,{field: 'date',title: '发布时间'}
-			,{field: 'category',title: '分类',hide:true}
-			,{field: 'sort',title: '排序'}
-			,{field: 'operate',title: '操作',toolbar: '#operateTpl',unresize: true}
+            {type:'checkbox'}
+			,{field: 'user_id',title: 'ID',hide:true}
+			,{field: 'user_name',title: '用户名'}
+			,{field: 'email',title: '邮箱'}
+			,{field: 'phone',title: '手机号'}
+            ,{field: 'operate',title: '操作',toolbar: '#operateTpl',unresize: true}
 			]],
-		url: 'data_table.json',
+		url: '../../UserServlet?method=userListLayui',
 		id: 'testReload',
-		event: true
+		event: true,
+	  	page:true,
+	  	limit:5
 	});
   
    // 刷新

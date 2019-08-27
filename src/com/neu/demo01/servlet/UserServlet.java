@@ -86,6 +86,22 @@ public class UserServlet extends HttpServlet {
 			page.setPageData(userbiz.getUserListByPage(currentPage,page.getPageSize()));
 			String userListPageJSON=JSON.toJSONStringWithDateFormat(page,"yyyy-MM-dd HH:mm:ss");
 			out.print(userListPageJSON);
+		}else if (method.equals("userListLayui")){
+			//获得页面当前页码page,
+			int page=request.getParameter("page")==null?1:Integer.parseInt(request.getParameter("page"));
+			//获得页面页大小limit
+			int limit=request.getParameter("limit")==null?1:Integer.parseInt(request.getParameter("limit"));
+			List<User> userList=userbiz.getUserListByPage(page,limit);
+			StringBuilder sb = new StringBuilder("");
+			sb.append("{" +
+					"  \"code\": 0," +
+					"  \"msg\": \"\"," +
+					"  \"count\": "+userbiz.getUserCount()+"," +
+					"  \"data\":");
+			String userListJSON=JSON.toJSONStringWithDateFormat(userList,"yyyy-MM-dd HH:mm:ss");
+			sb.append(userListJSON);//拼接对象数组
+			sb.append("}");
+			out.print(sb.toString());
 		}
 	}
 
