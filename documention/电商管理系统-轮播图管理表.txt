@@ -1,0 +1,13 @@
+/*
+SQLyog v10.2 
+MySQL - 5.7.13 
+*********************************************************************
+*/
+/*!40101 SET NAMES utf8 */;
+
+create table `carousel` (
+	`id` int (10),
+	`carDesc` varchar (150),
+	`imgpath` varchar (150),
+	`createtime` varchar (150)
+); 
