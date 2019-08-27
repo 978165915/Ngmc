@@ -100,7 +100,7 @@ public class  UserDaoImpl extends DBUtil implements UserDao {
         }finally {
 	        closeAll(conn,pstmt,rs);
         }
-        return 0;
+        return count;
     }
 
 
