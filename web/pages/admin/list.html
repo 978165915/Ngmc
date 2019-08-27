@@ -75,7 +75,8 @@ layui.use('table', function(){
 		cellMinWidth: 80,
 		skin: 'line',
 		cols: [[
-			{field: 'user_id',title: 'ID'}
+            {type:'checkbox'}
+			,{field: 'user_id',title: 'ID',hide:true}
 			,{field: 'user_name',title: '用户名'}
 			,{field: 'email',title: '邮箱'}
 			,{field: 'phone',title: '手机号'}
@@ -84,7 +85,8 @@ layui.use('table', function(){
 		url: '../../UserServlet?method=userListLayui',
 		id: 'testReload',
 		event: true,
-	  	page:true
+	  	page:true,
+	  	limit:5
 	});
   
    // 刷新
