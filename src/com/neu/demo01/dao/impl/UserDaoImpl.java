@@ -68,7 +68,7 @@ public class UserDaoImpl extends DBUtil implements UserDao {
     @Override
     public List<User> getUserListByPage(int currentPage, int pageSize) throws SQLException {
         List<User>userList=new ArrayList<>();
-        String sql="select user_id, user_name, user_password, email, phone"
+        String sql="select id, username, password, email, phone"
                 + " from userinfo limit ?,?";
         User user;
         try {
@@ -76,8 +76,8 @@ public class UserDaoImpl extends DBUtil implements UserDao {
             user = null;
             while (rs.next()) {
                 user = new User();
-                user.setUser_id(rs.getInt("user_id"));
-                user.setUser_name(rs.getString("user_name"));
+                user.setUser_id(rs.getInt("id"));
+                user.setUser_name(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
                 user.setPhone(rs.getString("phone"));
                 userList.add(user);
@@ -91,7 +91,7 @@ public class UserDaoImpl extends DBUtil implements UserDao {
     @Override
     public int getUserCount() throws SQLException {
 	    int count=0;
-	    String sql="SELECT COUNT(user_id) FROM userinfo";
+	    String sql="SELECT COUNT(id) FROM userinfo";
 	    try{
             rs=executeQuery(sql,null);
             if(rs.next()){
