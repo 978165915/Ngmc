@@ -18,8 +18,8 @@
 	<body>
 		<div class="weadmin-nav">
 			<span class="layui-breadcrumb">
-				<a href="javascript:;">首页</a> <a href="javascript:;">用户管理</a>
-				<a href="javascript:;"> <cite>用户列表</cite></a>
+				<a href="javascript:;">首页</a> <a href="javascript:;">商品管理</a>
+				<a href="javascript:;"> <cite>商品管理</cite></a>
 			</span>
 			<a style="float:right" class="layui-btn" id="btn-refresh"><i class="layui-icon">&#xe9aa;</i></a>
 		</div>
@@ -27,29 +27,20 @@
 		<div class="weadmin-body">
 			<div class="layui-row">
 				<form class="layui-form layui-col-md12 we-search">
-					用户搜索：
+					搜索条件：
+					<button class="layui-btn layui-btn-danger" onclick="delAll()">
+						<i class="layui-icon layui-icon-delete"></i>批量删除
+					</button>
+					<button class="layui-btn" onclick="WeAdminShow('添加商品','./add.html',600,400)">
+						<i class="layui-icon layui-icon-add-circle-fine"></i>添加
+					</button>
 					<div class="layui-inline">
-						<input class="layui-input" placeholder="开始日" name="start" id="start" />
-					</div>
-					<div class="layui-inline">
-						<input class="layui-input" placeholder="截止日" name="end" id="end" />
-					</div>
-					<div class="layui-inline">
-						<input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input" />
+						<input type="text" name="username" placeholder="请输入搜索条件" autocomplete="off" class="layui-input" />
 					</div>
 					<button class="layui-btn" lay-submit="" lay-filter="sreach">
 						<i class="layui-icon layui-icon-search"></i>
 					</button>
 				</form>
-			</div>
-			<div class="weadmin-block">
-				<button class="layui-btn layui-btn-danger" onclick="delAll()">
-					<i class="layui-icon layui-icon-delete"></i>批量删除
-				</button>
-				<button class="layui-btn" onclick="WeAdminShow('添加用户','./add.html',600,400)">
-					<i class="layui-icon layui-icon-add-circle-fine"></i>添加
-				</button>
-				
 			</div>
 			<table class="layui-hide" id="test" lay-filter="testReload"></table>
 			<script type="text/html" id="operateTpl">
@@ -76,15 +67,17 @@ layui.use('table', function(){
 		skin: 'line',
 		cols: [[
 			{field: 'id',title: 'ID',hide:true}
-			,{field: 'title',title: '标题'}
-			,{field: 'date',title: '发布时间'}
-			,{field: 'category',title: '分类',hide:true}
-			,{field: 'sort',title: '排序'}
+			,{field: 'imgpath',title: '图片'}
+			,{field: 'name',title: '商品名称'}
+			,{field: 'price',title: '价格'}
+			,{field: 'typeid',title: '类型'}
+            ,{field: 'creattime',title: '上架时间'}
 			,{field: 'operate',title: '操作',toolbar: '#operateTpl',unresize: true}
 			]],
 		url: 'data_table.json',
 		id: 'testReload',
-		event: true
+		event: true,
+	  	page:true
 	});
   
    // 刷新
