@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.alibaba.fastjson.JSON;
 import com.neu.demo01.biz.UserBiz;
 import com.neu.demo01.biz.impl.UserBizImpl;
+import com.neu.demo01.entity.Carousel;
 import com.neu.demo01.entity.PageBean;
 import com.neu.demo01.entity.User;
 import jdk.nashorn.internal.objects.NativeJSON;
@@ -75,9 +76,9 @@ public class UserServlet extends HttpServlet {
 			session.invalidate();
 			response.sendRedirect(request.getContextPath()+"/login.html");
 		}else if (method.equals("userList")){
-            List<User> userList=userbiz.getUserList();
-            String userListJSON=JSON.toJSONStringWithDateFormat(userList,"yyyy-MM-dd HH:mm:ss");
-            out.print(userListJSON);
+			List<User> userList=userbiz.getUserList();
+			String userListJSON=JSON.toJSONStringWithDateFormat(userList,"yyyy-MM-dd HH:mm:ss");
+			out.print(userListJSON);
         }else if (method.equals("userListPage")){
 			int currentPage=request.getParameter("currentPage")==null?1:Integer.parseInt(request.getParameter("currentPage"));
 			PageBean<User> page=new PageBean<>();
@@ -91,7 +92,7 @@ public class UserServlet extends HttpServlet {
 			int page=request.getParameter("page")==null?1:Integer.parseInt(request.getParameter("page"));
 			//获得页面页大小limit
 			int limit=request.getParameter("limit")==null?1:Integer.parseInt(request.getParameter("limit"));
-			List<User> userList=userbiz.getUserListByPage(page,limit);
+			List <User> userList=userbiz.getUserListByPage(page,limit);
 			StringBuilder sb = new StringBuilder("");
 			sb.append("{" +
 					"  \"code\": 0," +

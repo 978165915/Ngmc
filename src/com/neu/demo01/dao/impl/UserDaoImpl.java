@@ -65,7 +65,7 @@ public class  UserDaoImpl extends DBUtil implements UserDao {
 		return userList;
 	}
 
-    @Override
+    @Override //实现分页
     public List<User> getUserListByPage(int currentPage, int pageSize) throws SQLException {
         List<User>userList=new ArrayList<>();
         String sql="select id, username, password, email, phone"

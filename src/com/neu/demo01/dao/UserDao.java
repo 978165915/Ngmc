@@ -3,6 +3,7 @@ package com.neu.demo01.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.neu.demo01.entity.Carousel;
 import com.neu.demo01.entity.User;
 
 /**
