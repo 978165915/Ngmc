@@ -1,3 +1,4 @@
+/*
 package com.neu.demo01.dao.impl;
 
 import com.neu.demo01.dao.CarouselDao;
@@ -74,3 +75,4 @@ public class CarouselDaoImpl extends DBUtil implements CarouselDao {
 
 
 }
+*/
