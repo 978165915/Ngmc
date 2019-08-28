@@ -20,7 +20,7 @@ import jdk.nashorn.internal.objects.NativeJSON;
 /**
  * Servlet implementation class UserServlet
  */
-@WebServlet("/UserServlet/*")
+@WebServlet(  name="User",urlPatterns = "/UserServlet")
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
