@@ -1,3 +1,4 @@
+/*
 package com.neu.demo01.dao;
 
 import com.neu.demo01.entity.Carousel;
@@ -19,3 +20,4 @@ public interface CarouselDao {
 
 
 }
+*/
