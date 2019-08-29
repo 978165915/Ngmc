@@ -46,7 +46,7 @@ public class GoodsDaoImpl extends DBUtil implements GoodsDao {
         String sql="select `name`,`typeid`,`imgpath`,`price`,`goodsDesc`,`createTime`"
                 +"from Goods limit ?,?";
         try {
-            rs = executeQuery(sql);
+            rs = executeQuery(sql,(currentPage-1)*pageSize,pageSize);
             Goods goods = null;
             while (rs.next()) {
                 goods = new Goods();
