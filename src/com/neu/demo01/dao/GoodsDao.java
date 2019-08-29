@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface GoodsDao {
+    //新增商品
     int save(Goods goods)throws SQLException;
     List<Goods> getGoodsList() throws SQLException;
     List<Goods>getGoodsListByPage(int currentPage,int pageSize) throws SQLException;
