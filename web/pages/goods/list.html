@@ -43,7 +43,6 @@
 				</form>
 			</div>
 			<table class="layui-hide" id="test" lay-filter="testReload"></table>
-			<div id="demo0"></div>
 			<script type="text/html" id="operateTpl">
 				<a title="编辑" onclick="WeAdminEdit('编辑','./edit.html', 2, 600, 400)" href="javascript:;">
 					<i class="layui-icon">&#xe642;</i>
@@ -58,16 +57,6 @@
 		<script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script>
 		<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 		<script>
-            layui.use(['laypage', 'layer'], function() {
-                var laypage = layui.laypage
-                    , layer = layui.layer;
-
-                //总页数低于页码总数
-                laypage.render({
-                    elem: 'demo0'
-                    , count: 50 //数据总数
-                });
-            });
 			layui.use('table', function(){
 			  var table = layui.table
 				 ,$ = layui.jquery;
