@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import com.alibaba.fastjson.JSON;
 import com.neu.demo01.biz.UserBiz;
 import com.neu.demo01.biz.impl.UserBizImpl;
-import com.neu.demo01.entity.Carousel;
 import com.neu.demo01.entity.PageBean;
 import com.neu.demo01.entity.User;
 import jdk.nashorn.internal.objects.NativeJSON;
@@ -45,19 +44,19 @@ public class UserServlet extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		UserBiz userbiz = new UserBizImpl();
 		if(method.equals("login")) {//执行登录
-			String userName = request.getParameter("username");
+			String userName = request.getParameter("userName");
 			String password = request.getParameter("password");
 			User user =	userbiz.login(userName,password);
 			if(user!=null) {//登录成功
 				session.setAttribute("user",user);
 				session.setMaxInactiveInterval(5*60);
-				response.sendRedirect(request.getContextPath()+"/admin.html");
+				response.sendRedirect(request.getContextPath()+"/index.html");
 			}else {//登录失败
 				response.sendRedirect(request.getContextPath()+"/login.html");
 			}
 		}else if(method.equals("register")) {
 			//执行注册
-			String  username =request.getParameter("userName");
+			String  username =request.getParameter("username");
 			String pwd =request.getParameter("password");
 			String email =request.getParameter("email");
 			String phone=request.getParameter("phone");
@@ -66,7 +65,7 @@ public class UserServlet extends HttpServlet {
 			if(userbiz.register(user)>0) {//登录成功
 				response.sendRedirect(request.getContextPath()+"/admin.html");
 			}else {//登录失败
-				response.sendRedirect(request.getContextPath()+"/login.html");
+				response.sendRedirect(request.getContextPath()+"/register.html");
 			}
 		}else if (method.equals("show")){
 			User user=(User)session.getAttribute("user");
@@ -76,9 +75,9 @@ public class UserServlet extends HttpServlet {
 			session.invalidate();
 			response.sendRedirect(request.getContextPath()+"/login.html");
 		}else if (method.equals("userList")){
-			List<User> userList=userbiz.getUserList();
-			String userListJSON=JSON.toJSONStringWithDateFormat(userList,"yyyy-MM-dd HH:mm:ss");
-			out.print(userListJSON);
+            List<User> userList=userbiz.getUserList();
+            String userListJSON=JSON.toJSONStringWithDateFormat(userList,"yyyy-MM-dd HH:mm:ss");
+            out.print(userListJSON);
         }else if (method.equals("userListPage")){
 			int currentPage=request.getParameter("currentPage")==null?1:Integer.parseInt(request.getParameter("currentPage"));
 			PageBean<User> page=new PageBean<>();
@@ -92,7 +91,7 @@ public class UserServlet extends HttpServlet {
 			int page=request.getParameter("page")==null?1:Integer.parseInt(request.getParameter("page"));
 			//获得页面页大小limit
 			int limit=request.getParameter("limit")==null?1:Integer.parseInt(request.getParameter("limit"));
-			List <User> userList=userbiz.getUserListByPage(page,limit);
+			List<User> userList=userbiz.getUserListByPage(page,limit);
 			StringBuilder sb = new StringBuilder("");
 			sb.append("{" +
 					"  \"code\": 0," +

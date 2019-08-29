@@ -23,11 +23,10 @@ public class  UserDaoImpl extends DBUtil implements UserDao {
 
 	@Override
 	public User getUserByUsername(String username,String pwd) throws SQLException {
-		String sql="SELECT id, username, `password`,email, phone " +
-				"FROM `userinfo` where username=? and `password`=?";
+		String sql="select id, username, password，email, phone"
+				+ " from userinfo where username=? and password=?";
 		User user;
 		try {
-			System.out.println(MD5.MD5Encode(pwd));
 			rs = executeQuery(sql, username,MD5.MD5Encode(pwd));
 			user = null;
 			if (rs.next()) {
@@ -66,7 +65,7 @@ public class  UserDaoImpl extends DBUtil implements UserDao {
 		return userList;
 	}
 
-    @Override //实现分页
+    @Override
     public List<User> getUserListByPage(int currentPage, int pageSize) throws SQLException {
         List<User>userList=new ArrayList<>();
         String sql="select id, username, password, email, phone"

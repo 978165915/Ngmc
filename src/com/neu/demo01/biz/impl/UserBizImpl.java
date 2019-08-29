@@ -42,7 +42,7 @@ public class UserBizImpl implements UserBiz {
 	}
 
 	@Override
-	public List <User> getUserListByPage(int currentPage, int pageSize) {
+	public List<User> getUserListByPage(int currentPage, int pageSize) {
 		try {
 			return new UserDaoImpl().getUserListByPage(currentPage,pageSize);
 		} catch (SQLException e) {

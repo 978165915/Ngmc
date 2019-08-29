@@ -8,24 +8,21 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CarouselBizImpl  implements CarouselBiz {
-
     @Override
-    public int save(Carousel carousel) throws SQLException {
+    public int save(Carousel carousel)  {
         try {
-
-
             return new CarouselDaoImpl().save(carousel);
-        }catch (SQLException e){
-
+        } catch (SQLException e) {
             e.printStackTrace();
-            return  0;
+            return 0;
         }
-
     }
 
 
+
+
     @Override
-    public int delete(Carousel carousel) {
+    public int delete(Carousel carousel)  {
         try {
             return new CarouselDaoImpl().delete(carousel);
         } catch (SQLException e) {
@@ -51,22 +48,6 @@ public class CarouselBizImpl  implements CarouselBiz {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
-        }
-    }
-
-
-    @Override
-    public int getUserCount() {
-        return new CarouselDaoImpl().getUserCount();
-    }
-
-    @Override
-    public List <Carousel> getCarouselU(int currentPage, int pageSize) {
-        try {
-            return new  CarouselDaoImpl().getCarouselList(currentPage,pageSize);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return  null;
         }
     }
 }
