@@ -51,7 +51,7 @@
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                <button class="layui-btn" lay-submit lay-filter="lunbo">立即提交</button>
                 <button type="button" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -67,13 +67,13 @@
         form.on('submit(add)', function(data){
             console.log(data);
             //发异步，把数据提交给php
-            layer.alert("增加成功", {icon: 6},function () {
-                // 获得frame索引
+           /* layer.alert("增加成功", {icon: 6},function () {
+          /!*      // 获得frame索引
                 var index = parent.layer.getFrameIndex(window.name);
                 //关闭当前frame
-                parent.layer.close(index);
-            });
-            return false;
+                parent.layer.close(index);*!/
+            });*/
+            return true;
         });
     });
 </script>

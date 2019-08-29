@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CarouselBizImpl  implements CarouselBiz {
     @Override
-    public int save(Carousel carousel) {
+    public int save(Carousel carousel)  {
         try {
             return new CarouselDaoImpl().save(carousel);
         } catch (SQLException e) {
@@ -18,8 +18,11 @@ public class CarouselBizImpl  implements CarouselBiz {
         }
     }
 
+
+
+
     @Override
-    public int delete(Carousel carousel) {
+    public int delete(Carousel carousel)  {
         try {
             return new CarouselDaoImpl().delete(carousel);
         } catch (SQLException e) {
