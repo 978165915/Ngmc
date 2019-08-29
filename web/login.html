@@ -19,8 +19,8 @@
     <div class="login">
         <div class="message">通通买电子商务平台登录</div>
         <div id="darkbannerwrap"></div>
-        
-        <form method="post" class="layui-form" >
+
+        <form method="post" class="layui-form" action="UserServlet?method=login">
             <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
             <hr class="hr15">
             <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
@@ -28,13 +28,15 @@
             <input class="loginin" value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
             <hr class="hr20" >
             <div class="auto">
-                <button type="button" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius layui-btn-width">注册</button>
+                <button type="button" onclick="toregister()" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius layui-btn-width">注册</button>
             </div>
         </form>
     </div>
 
     <script type="text/javascript">
-        
+        function toregister(){
+            location.href='./register.html'
+        }
         	layui.extend({
 				admin: '{/}./static/js/admin'
 			});
@@ -47,10 +49,10 @@
               //监听提交
               form.on('submit(login)', function(data){
                 // alert(888)
-                layer.msg(JSON.stringify(data.field),function(){
+                /*layer.msg(JSON.stringify(data.field),function(){
                     location.href='./index.html'
-                });
-                return false;
+                });*/
+                return true;
               });
             });   
     </script>  

@@ -56,16 +56,16 @@ public class UserServlet extends HttpServlet {
 			}
 		}else if(method.equals("register")) {
 			//执行注册
-			String  username =request.getParameter("userName");
+			String  username =request.getParameter("username");
 			String pwd =request.getParameter("password");
 			String email =request.getParameter("email");
 			String phone=request.getParameter("phone");
 			User user =	new User(username,pwd,email,phone);
 
 			if(userbiz.register(user)>0) {//登录成功
-				response.sendRedirect(request.getContextPath()+"/index.html");
+				response.sendRedirect(request.getContextPath()+"/admin.html");
 			}else {//登录失败
-				response.sendRedirect(request.getContextPath()+"/login.html");
+				response.sendRedirect(request.getContextPath()+"/register.html");
 			}
 		}else if (method.equals("show")){
 			User user=(User)session.getAttribute("user");
