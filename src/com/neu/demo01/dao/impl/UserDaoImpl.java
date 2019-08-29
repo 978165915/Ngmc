@@ -23,7 +23,7 @@ public class  UserDaoImpl extends DBUtil implements UserDao {
 
 	@Override
 	public User getUserByUsername(String username,String pwd) throws SQLException {
-		String sql="select id, username, password，email, phone"
+		String sql="select id, username, password,email, phone"
 				+ " from userinfo where username=? and password=?";
 		User user;
 		try {
