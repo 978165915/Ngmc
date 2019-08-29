@@ -41,8 +41,7 @@ public class Carousel {
         this.createtime = createtime;
     }
 
-    public Carousel(int id, String cardesc, String imgpath, String createtime) {
-        this.id = id;
+    public Carousel( String cardesc, String imgpath, String createtime) {
         this.cardesc = cardesc;
         this.imgpath = imgpath;
         this.createtime = createtime;

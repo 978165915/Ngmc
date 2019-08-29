@@ -10,6 +10,21 @@ import java.util.List;
 public class CarouselBizImpl  implements CarouselBiz {
 
     @Override
+    public int save(Carousel carousel) throws SQLException {
+        try {
+
+
+            return new CarouselDaoImpl().save(carousel);
+        }catch (SQLException e){
+
+            e.printStackTrace();
+            return  0;
+        }
+
+    }
+
+
+    @Override
     public int delete(Carousel carousel) {
         try {
             return new CarouselDaoImpl().delete(carousel);
