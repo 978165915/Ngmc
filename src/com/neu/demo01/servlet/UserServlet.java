@@ -44,13 +44,13 @@ public class UserServlet extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		UserBiz userbiz = new UserBizImpl();
 		if(method.equals("login")) {//执行登录
-			String userName = request.getParameter("userName");
+			String userName = request.getParameter("username");
 			String password = request.getParameter("password");
 			User user =	userbiz.login(userName,password);
 			if(user!=null) {//登录成功
 				session.setAttribute("user",user);
 				session.setMaxInactiveInterval(5*60);
-				response.sendRedirect(request.getContextPath()+"/index.html");
+				response.sendRedirect(request.getContextPath()+"/admin.html");
 			}else {//登录失败
 				response.sendRedirect(request.getContextPath()+"/login.html");
 			}
