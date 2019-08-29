@@ -43,7 +43,7 @@ public class GoodsServlet extends HttpServlet {
             String createTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
             //String createTime=查询  获取java系统时间 格式
             Goods goods=new Goods(name,Integer.parseInt(typeid),"",price,goodsDesc, createTime);
-            if (method.equals("save")){//新增
+            if (goodsBiz.save(goods)>0){//新增
                 response.sendRedirect(request.getContextPath()+"/list.html");
             }else{
                 response.sendRedirect(request.getContextPath()+"/add.html");
@@ -68,6 +68,6 @@ public class GoodsServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+        doPost(request,response);
     }
 }
