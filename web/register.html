@@ -23,9 +23,9 @@
 			<div id="darkbannerwrap"></div>
 
 			<form method="post" class="layui-form" action="UserServlet?method=register">
-				<input name="username" placeholder="用户名" type="text" lay-verify="required" class="layui-input">
+				<input name="username" placeholder="用户名" type="text" lay-verify="username" class="layui-input">
 				<hr class="hr15">
-				<input name="password" lay-verify="required" placeholder="密码" type="password" class="layui-input">
+				<input name="password" lay-verify="pass" placeholder="密码" type="password" class="layui-input">
 				<hr class="hr15">
 				<input name="email" placeholder="邮箱" type="text" lay-verify="required" class="layui-input" id="email">
 				<hr class="hr15">
@@ -38,17 +38,7 @@
 				</div>
 			</form>
 		</div>
-
 		<script type="text/javascript">
-			email.onchange = function() {
-				var email = this.value;
-				var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-				if(reg.test(email)) {
-
-				} else {
-					alert("邮箱格式不正确");
-				}
-			};
 			function tologin(){
                 location.href = './login.html'
 			}
@@ -56,12 +46,41 @@
 			layui.extend({
 				admin: '{/}./static/js/admin'
 			});
-			layui.use(['form', 'admin'], function() {
+			layui.use(['form', 'admin','jquery'], function() {
 				var form = layui.form,
+                    $ = layui.jquery,
 					admin = layui.admin;
 				// layer.msg('玩命卖萌中', function(){
 				//   //关闭后的操作
 				//   });
+                //自定义验证规则
+                form.verify({
+                    username: function(value){
+                        if(value.length < 5){
+                            return '标题至少得5个字符啊';
+                        }
+                        //检测用户名是否存在
+                        var isExist = false;//默认不存在
+						$.ajax({
+							'url':'UserServlet?method=checkUserName',
+							'data':"username="+value,//提交数据到服务器
+							'async':false,
+							'dataType':"text",
+							'success':function (res) {//res是后台servlet用out.print()输出的数据
+								if(res == 'exist'){//如果用户名存在
+                                    isExist = true
+								}
+                            }
+						});
+                        if(isExist){//如果存在
+                            return '此用户名存在'
+						}
+                    }
+                    ,pass: [
+                        /^[\S]{6,12}$/
+                        ,'密码必须6到12位，且不能出现空格'
+                    ]
+                });
 				//监听提交
 				form.on('submit(login)', function(data) {
 					// alert(888)

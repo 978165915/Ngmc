@@ -61,4 +61,14 @@ public class UserBizImpl implements UserBiz {
 		}
 	}
 
+	@Override
+	public boolean isExistUserName(String username) {
+		try {
+			return new UserDaoImpl().isExistUserName(username);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 }
