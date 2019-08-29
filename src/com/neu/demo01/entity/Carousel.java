@@ -2,10 +2,10 @@ package com.neu.demo01.entity;
 
 public class Carousel {
 
-    private int id;
-    private String cardesc;
-    private String imgpath;
-    private String createtime;
+    private int id; //编号
+    private String cardesc;//轮播图广告描述
+    private String imgpath;//轮播图路径
+    private String createtime;//用户创建时间
 
 
 
