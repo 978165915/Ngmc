@@ -22,11 +22,11 @@
 
 <body>
 <div class="weadmin-body">
-    <form class="layui-form" action="" lay-filter="example">
+    <form class="layui-form" action="CarouselServlet?method=lunbo"  method="get"  lay-filter="example">
         <div class="layui-form-item">
-            <label class="layui-form-label">轮播广告的描述</label>
+            <label class="layui-form-label" >轮播广告的描述</label>
             <div class="layui-input-inline">
-                <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="轮播广告的描述" class="layui-input">
+                <input type="text" name="carDesc"  lay-verify="title" autocomplete="off" placeholder="轮播广告的描述" class="layui-input">
             </div>
         </div>
 
@@ -39,7 +39,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">用户创建时间</label>
             <div class="layui-input-inline">
-                <input type="text" name="price" placeholder="用户创建时间" autocomplete="off" class="layui-input">
+                <input type="text" name="user" placeholder="用户创建时间" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
