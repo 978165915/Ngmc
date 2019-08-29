@@ -15,9 +15,7 @@ public interface CarouselDao {
    Carousel upen( String id) throws SQLException;
    //查询多条信息
     List<Carousel> getUpen() throws SQLException;
-    int getUserCount();
 
-    List<Carousel> getCarouselList(int currentPage, int pageSize) throws SQLException;
 
 
 }
