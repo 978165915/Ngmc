@@ -31,10 +31,10 @@
 				<hr class="hr15">
 				<input name="phone" placeholder="手机号" type="text" lay-verify="required" class="layui-input">
 				<hr class="hr15">
-				<input class="loginin" value="完成注册" onclick="tologin()" lay-submit lay-filter="login" style="width:100%;" type="submit">
+				<input class="loginin" value="完成注册" lay-submit lay-filter="login" style="width:100%;" type="submit">
 				<hr class="hr20">
 				<div class="auto">
-					<button type="button" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius layui-btn-width">返回登录</button>
+					<button type="button" onclick="tologin()" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius layui-btn-width">返回登录</button>
 				</div>
 			</form>
 		</div>
@@ -44,7 +44,7 @@
 				var email = this.value;
 				var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
 				if(reg.test(email)) {
-					alert("邮箱格式正确");
+
 				} else {
 					alert("邮箱格式不正确");
 				}
