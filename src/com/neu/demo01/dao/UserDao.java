@@ -18,4 +18,6 @@ public interface UserDao {
 	List<User>getUserList() throws SQLException;
 	List<User>getUserListByPage(int currentPage,int pageSize) throws SQLException;
 	int getUserCount() throws SQLException;
+	//检测用户名是否存在
+	public boolean isExistUserName(String username) throws SQLException;
 }

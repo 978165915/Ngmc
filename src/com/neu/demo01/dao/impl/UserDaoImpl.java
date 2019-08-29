@@ -23,7 +23,7 @@ public class  UserDaoImpl extends DBUtil implements UserDao {
 
 	@Override
 	public User getUserByUsername(String username,String pwd) throws SQLException {
-		String sql="select id, username, password，email, phone"
+		String sql="select id, username, password,email, phone"
 				+ " from userinfo where username=? and password=?";
 		User user;
 		try {
@@ -103,5 +103,20 @@ public class  UserDaoImpl extends DBUtil implements UserDao {
         return count;
     }
 
+    @Override
+    public boolean isExistUserName(String username) throws SQLException {
+        String sql="select id, username, password,email, phone"
+                + " from userinfo where username=?";
+        User user;
+        try {
+            rs = executeQuery(sql, username);
+            if (rs.next()) {
+                return true;
+            }
+        } finally {
+            closeAll(conn, pstmt, rs);
+        }
+        return false;
+    }
 
 }

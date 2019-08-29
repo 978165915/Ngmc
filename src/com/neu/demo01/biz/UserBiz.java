@@ -12,4 +12,6 @@ public interface UserBiz {
 	List<User> getUserList();
 	List<User>getUserListByPage(int currentPage,int pageSize);
 	int getUserCount();
+	//检测用户名是否存在
+	public boolean isExistUserName(String username);
 }

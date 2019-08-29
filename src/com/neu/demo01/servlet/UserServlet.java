@@ -102,6 +102,9 @@ public class UserServlet extends HttpServlet {
 			sb.append(userListJSON);//拼接对象数组
 			sb.append("}");
 			out.print(sb.toString());
+		}else if(method.equals("checkUserName")){
+			String username = request.getParameter("username");
+			out.print(userbiz.isExistUserName(username)?"exist":"noexist");
 		}
 	}
 
