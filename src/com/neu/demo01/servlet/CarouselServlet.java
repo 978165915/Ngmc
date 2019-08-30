@@ -15,30 +15,38 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
 @WebServlet("/CarouselServlet")
 public class CarouselServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String method = request.getParameter("method");
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+        HttpSession session=request.getSession();
         CarouselBiz carouselbiz = new CarouselBizImpl(); //添加
+        PrintWriter out=response.getWriter();
         if (method.equals("lunbo")) {
             String cardesc = request.getParameter("carDesc");   //后台获取前台信息
             String price = request.getParameter("price");
             String user = request.getParameter("user");
-            System.out.println(price);
             Carousel carousel = new Carousel(cardesc, price, user); //把后台获到的信息付给Carousel
-            if (carouselbiz.save(carousel)>0){
+            if (carouselbiz.save(carousel) > 0) {     //添加成功时
+                session.setAttribute("carousel",carousel);
+                session.setMaxInactiveInterval(5*60);
+                response.sendRedirect(request.getContextPath()+"/list.html");
 
 
-
+            }else {
+                response.sendRedirect(request.getContextPath()+"/list.html");
             }
 
 
         }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        doPost(request, response);
+
     }
 }
