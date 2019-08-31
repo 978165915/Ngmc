@@ -52,7 +52,7 @@ public class CarouselBizImpl  implements CarouselBiz {
     }
 
     @Override  //页码数
-    public List <Carousel> getCarouselListByPage( int currentPage, int pageSize ) throws SQLException {
+    public List <Carousel> getCarouselListByPage( int currentPage, int pageSize ) {
        try {
            return new CarouselDaoImpl ().getCarouselListByPage (currentPage,pageSize);
 
@@ -63,7 +63,7 @@ public class CarouselBizImpl  implements CarouselBiz {
     }
 
     @Override
-    public int getCarouselsCount() throws SQLException {
+    public int getCarouselsCount() {
        try {
            return new CarouselDaoImpl ().getCarouselsCount ();
 
