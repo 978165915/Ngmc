@@ -15,8 +15,8 @@ public interface CarouselBiz {
     //查询多条信息
     List<Carousel> getUpen();
     //获取页码数
-    List<Carousel>getCarouselListByPage( int currentPage, int pageSize) throws SQLException;
-    int getCarouselsCount() throws SQLException; //获取多少条数据记录
+    List<Carousel>getCarouselListByPage( int currentPage, int pageSize) ;
+    int getCarouselsCount() ; //获取多少条数据记录
 
 
 
