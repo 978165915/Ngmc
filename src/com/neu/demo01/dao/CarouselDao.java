@@ -1,6 +1,7 @@
 package com.neu.demo01.dao;
 
 import com.neu.demo01.entity.Carousel;
+import com.neu.demo01.entity.Goods;
 import com.neu.demo01.entity.User;
 
 import java.sql.SQLException;
@@ -15,7 +16,8 @@ public interface CarouselDao {
    Carousel upen( String id) throws SQLException;
    //查询多条信息
     List<Carousel> getUpen() throws SQLException;
-
+    List<Carousel>getCarouselListByPage( int currentPage, int pageSize) throws SQLException; //页数
+    int getCarouselsCount() throws SQLException; //查询多少条记录
 
 
 }
