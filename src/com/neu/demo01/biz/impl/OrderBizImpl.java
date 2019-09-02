@@ -36,12 +36,32 @@ public class OrderBizImpl implements OrderBiz {
     }
 
     @Override
+    public List<Order> getOrderListByPage(int currentPage, int pageSize) {
+        try {
+            return new OrderDaoImpl().getOrderListByPage(currentPage, pageSize);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public List<Order> getOrderList() {
         try {
             return new OrderDaoImpl().getOrderList();
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public int getOrderCount() {
+        try {
+            return new OrderDaoImpl().getOrderCount();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
         }
     }
 }
