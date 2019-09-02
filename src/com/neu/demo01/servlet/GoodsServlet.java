@@ -33,7 +33,7 @@ public class GoodsServlet extends HttpServlet {
         String method = request.getParameter("method");
         PrintWriter out=response.getWriter();
         GoodsBiz goodsBiz=new GoodsBizImpl();
-        if (method.equals("submit")){
+        if (method.equals("save")){
             String name=request.getParameter("name");
             String typeid=request.getParameter("typeid");
             String imgpath=request.getParameter("imgpath");
