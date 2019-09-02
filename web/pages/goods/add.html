@@ -22,7 +22,7 @@
   
   <body>
     <div class="weadmin-body">
-        <form class="layui-form" action="" lay-filter="example">
+        <form class="layui-form" action="" lay-filter="example" method="post">
             <div class="layui-form-item">
                 <label class="layui-form-label">商品</label>
                 <div class="layui-input-inline">
@@ -36,11 +36,12 @@
                 <div class="layui-input-inline">
                     <select name="typeid" lay-filter="aihao">
                         <option value="">==请选择商品类型==</option>
-                        <option value="0">写作</option>
-                        <option value="1">阅读</option>
-                        <option value="2">游戏</option>
-                        <option value="3">音乐</option>
-                        <option value="4">旅行</option>
+                        <option value="1">手机</option>
+                        <option value="2">电脑</option>
+                        <option value="3">生鲜</option>
+                        <option value="4">水果</option>
+                        <option value="5">电器</option>
+                        <option value="6">配件</option>
                     </select>
                 </div>
             </div>
@@ -68,7 +69,7 @@
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                    <button class="layui-btn" lay-submit="" lay-filter="add">立即提交</button>
                     <button type="button" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -76,22 +77,37 @@
     </div>
 	<script src="../../lib/layui/layui.js" charset="utf-8"></script>
     <script>
-        layui.use(['form','layer'], function(){
+        layui.use(['form','layer','jquery'], function(){
           	var form = layui.form,
+                $ = layui.jquery,
           		layer = layui.layer;
 
 	        //监听提交
-	        form.on('submit(add)', function(data){
-	            console.log(data);
-	            //发异步，把数据提交给php
-	            layer.alert("增加成功", {icon: 6},function () {
-	                // 获得frame索引
-	                var index = parent.layer.getFrameIndex(window.name);
-	                //关闭当前frame
-	                parent.layer.close(index);
-	            });
-	            return false;
-	        }); 
+            form.on('submit(add)', function(data){
+                console.log(data);
+                //发异步，把数据提交给後台
+                $.ajax( {
+                    "url": "../../GoodsServlet?method=save", // 要提交的URL路径
+                    "type":"post", // 发送请求的方式
+                    "data":  data.field, // 要发送到服务器的数据
+                    "dataType":"text",// 指定传输的数据格式
+                    "success":function(result) {// 请求成功后要执行的代码
+                        layer.alert("操作成功", {icon: 6},function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            window.parent.location.reload();//新增成功后刷新父界面
+                        });
+                    },
+                    "error":  function(){// 请求失败后要执行的代码
+                        layer.alert("内部发生异常", {
+                            title: '操作提示'
+                        });
+                    }
+                } );
+                return false;
+            });
         });
     </script>
   </body>

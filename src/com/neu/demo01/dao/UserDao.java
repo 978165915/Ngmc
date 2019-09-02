@@ -20,4 +20,6 @@ public interface UserDao {
 	int getUserCount() throws SQLException;
 	//检测用户名是否存在
 	public boolean isExistUserName(String username) throws SQLException;
+	public boolean isExistEmail(String email) throws SQLException;
+	public boolean isExistPhone(String phone) throws SQLException;
 }

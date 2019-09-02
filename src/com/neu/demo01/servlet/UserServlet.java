@@ -105,6 +105,12 @@ public class UserServlet extends HttpServlet {
 		}else if(method.equals("checkUserName")){
 			String username = request.getParameter("username");
 			out.print(userbiz.isExistUserName(username)?"exist":"noexist");
+		}else if(method.equals("checkEmail")){
+			String email = request.getParameter("email");
+			out.print(userbiz.isExistEmail(email)?"exist":"noexist");
+		}else if(method.equals("checkPhone")){
+			String phone = request.getParameter("phone");
+			out.print(userbiz.isExistPhone(phone)?"exist":"noexist");
 		}
 	}
 

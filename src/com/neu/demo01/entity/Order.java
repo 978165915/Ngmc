@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private  String orderId;
+    private  int orderId;
     private String userId;
     private double total;
     private int payType;
@@ -20,7 +20,7 @@ public class Order {
         super();
     }
 
-    public Order(String orderId, String userId, double total, int payType, int status, String shipName, String shipCode, String createTime, String closeTime) {
+    public Order(int orderId, String userId, double total, int payType, int status, String shipName, String shipCode, String createTime, String closeTime) {
         super();
         this.orderId = orderId;
         this.userId = userId;
@@ -33,11 +33,11 @@ public class Order {
         this.closeTime = closeTime;
     }
 
-    public String getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
