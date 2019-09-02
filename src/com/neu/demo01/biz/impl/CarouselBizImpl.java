@@ -32,7 +32,7 @@ public class CarouselBizImpl  implements CarouselBiz {
     }
 
     @Override     //查询一条
-    public Carousel upen(String id) {
+    public Carousel upen(int id) {
         try {
             return new  CarouselDaoImpl().upen(id);
         } catch (SQLException e) {
@@ -53,26 +53,36 @@ public class CarouselBizImpl  implements CarouselBiz {
 
     @Override  //页码数
     public List <Carousel> getCarouselListByPage( int currentPage, int pageSize ) {
-       try {
-           return new CarouselDaoImpl ().getCarouselListByPage (currentPage,pageSize);
+        try {
+            return new CarouselDaoImpl().getCarouselListByPage (currentPage,pageSize);
 
-    }catch (SQLException e ){
-           e.printStackTrace();
-       }
-       return null;
+        }catch (SQLException e ){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public int getCarouselsCount() {
-       try {
-           return new CarouselDaoImpl ().getCarouselsCount ();
+        try {
+            return new CarouselDaoImpl ().getCarouselsCount ();
 
-       }catch (SQLException e){
-           e.printStackTrace ();
-       }
+        }catch (SQLException e){
+            e.printStackTrace ();
+        }
         return 0;
 
 
 
+    }
+
+    @Override     //修改
+    public int update( Carousel carousel ) {
+        try {
+            return new CarouselDaoImpl ().update (carousel);
+        } catch (SQLException e) {
+            e.printStackTrace ( );
+        }
+        return 0;
     }
 }

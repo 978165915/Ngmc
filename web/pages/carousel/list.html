@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8">
 	<title>轮播图列表-通通买电子购物商城V1.0</title>
-	<meta name="renderer" content="webkit" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-	<link rel="stylesheet" href="../../static/css/font.css" />
-	<link rel="stylesheet" href="../../static/css/weadmin.css" />
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="../../static/css/font.css">
+	<link rel="stylesheet" href="../../static/css/weadmin.css">
 	<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
 	<!--[if lt IE 9]>
 	<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -18,44 +19,46 @@
 <body>
 <div class="weadmin-nav">
 			<span class="layui-breadcrumb">
-				<a href="javascript:;">首页</a> <a href="javascript:;"> 轮播图管理</a>
-				<a href="javascript:;"> <cite>轮播图管理</cite></a>
-			</span>
-	<a style="float:right" class="layui-btn" id="btn-refresh"><i class="layui-icon">&#xe9aa;</i></a>
+        <a href="">首页</a>
+        <a href="">轮播图管理</a>
+        <a>
+          <cite>轮播图管理列表</cite></a>
+      </span>
+	<a class="layui-btn layui-btn-sm" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+		<i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
-
 <div class="weadmin-body">
 	<div class="layui-row">
 		<form class="layui-form layui-col-md12 we-search">
-			搜索条件：
-			<button class="layui-btn layui-btn-danger" onclick="delAll()">
-				<i class="layui-icon layui-icon-delete"></i>批量删除
-			</button>
-			<button class="layui-btn" onclick="WeAdminShow('添加商品','./add.html',600,400)">
-				<i class="layui-icon layui-icon-add-circle-fine"></i>添加
-			</button>
 			<div class="layui-inline">
-				<input type="text" name="username" placeholder="请输入搜索条件" autocomplete="off" class="layui-input" />
+				<input class="layui-input" placeholder="开始日" name="start" id="start">
 			</div>
-			<button class="layui-btn" lay-submit="" lay-filter="sreach">
-				<i class="layui-icon layui-icon-search"></i>
-			</button>
+			<div class="layui-inline">
+				<input class="layui-input" placeholder="截止日" name="end" id="end">
+			</div>
+			<div class="layui-inline">
+				<input type="text" name="id" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+			</div>
+			<button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
 		</form>
+	</div>
+	<div class="weadmin-block">
+		<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+		<button class="layui-btn" onclick="WeAdminShow('添加轮播图','./add.html')"><i class="layui-icon"></i>添加</button>
+		<span class="fr" style="line-height:40px"></span>
 	</div>
 	<table class="layui-hide" id="test" lay-filter="testReload"></table>
 	<script type="text/html" id="operateTpl">
-		<a title="编辑" onclick="WeAdminEdit('编辑','./edit.html', 2, 600, 400)" href="javascript:;">
+		<a title="编辑" onclick="WeAdminEdit('编辑','./edit.html', {{d.id}}, 600, 400)" href="javascript:;">
 			<i class="layui-icon">&#xe642;</i>
 		</a>
-		<a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+		<a title="删除" onclick="member_del(this,{{d.id}},'CarouselServlet')" href="javascript:;">
 			<i class="layui-icon">&#xe640;</i>
 		</a>
 	</script>
 </div>
-<!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
 <script src="../../lib/layui/layui.js" charset="utf-8"></script>
 <script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use('table', function(){
         var table = layui.table
@@ -66,30 +69,39 @@
             cellMinWidth: 80,
             skin: 'line',
             cols: [[
-                {field: 'id',title: 'ID'}
-                ,{field: 'carDesc',title: '轮播广告描述'}
+                {type: 'checkbox'}
+                ,{field: 'id',title: 'ID'}
+                ,{field: 'cardesc',title: '轮播广告描述'}
                 ,{field: 'imgpath',title: '轮播图路径'}
                 ,{field: 'createtime',title: '用户创建时间'}
                 ,{field: 'categoryid',title: '类别编号'}
                 ,{field: 'operate',title: '操作',toolbar: '#operateTpl',unresize: true}
             ]],
-            url: '../../CarouselServlet?method=carouselList',  //连接读取
+            url: '../../CarouselServlet?method=carouselList',
             id: 'testReload',
-            event: true,
-            page:true
+            page:true,
+            event: true
         });
 
+        $('.demoTable .layui-btn').on('click', function(){
+            var categoryval=$('#demoReload').val();
+            table.reload('testReload', {
+                where: {
+                    category: categoryval
+                }
+            });
+        });
         // 刷新
         $('#btn-refresh').on('click', function () {
             tableIns.reload();
         });
         //监听行单击事件（单击事件为：rowDouble）
         table.on('row(testReload)', function(obj){
-            var data = obj.data;
+            /* var data = obj.data;
 
             layer.alert(JSON.stringify(data), {
-                title: '当前行数据：'
-            });
+              title: '当前行数据：'
+            }); */
 
             //标注选中样式
             obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
@@ -97,5 +109,7 @@
         });
     });
 </script>
+
 </body>
+
 </html>
