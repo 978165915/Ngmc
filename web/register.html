@@ -27,9 +27,9 @@
 				<hr class="hr15">
 				<input name="password" lay-verify="pass" placeholder="密码" type="password" class="layui-input">
 				<hr class="hr15">
-				<input name="email" placeholder="邮箱" type="text" lay-verify="required" class="layui-input" id="email">
+				<input name="email" placeholder="邮箱" type="text" lay-verify="email" class="layui-input" id="email">
 				<hr class="hr15">
-				<input name="phone" placeholder="手机号" type="text" lay-verify="required" class="layui-input">
+				<input name="phone" placeholder="手机号" type="text" lay-verify="phone" class="layui-input">
 				<hr class="hr15">
 				<input class="loginin" value="完成注册" lay-submit lay-filter="login" style="width:100%;" type="submit">
 				<hr class="hr20">
@@ -75,11 +75,53 @@
                         if(isExist){//如果存在
                             return '此用户名存在'
 						}
-                    }
-                    ,pass: [
+                    },pass: [
                         /^[\S]{6,12}$/
                         ,'密码必须6到12位，且不能出现空格'
-                    ]
+                    ],
+                    email: function(value){
+                        /*var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+                        if (reg.test(this.value)) {
+                            return true;
+                        } else {
+                            return '邮箱格式不正确！'
+                        }*/
+                        var isExist = false;
+                        $.ajax({
+                            'url':'UserServlet?method=checkEmail',
+                            'data':"email="+value,
+                            'async':false,
+                            'dataType':"text",
+                            'success':function (res) {
+                                if(res == 'exist'){
+                                    isExist = true
+                                }
+                            }
+                        });
+                        if(isExist){//如果存在
+                            return '此邮箱已使用'
+                        }
+                    },
+                    phone: function(value){
+                        if(value.length < 11){
+                            return '手机格式不正确';
+                        }
+                        var isExist = false;
+                        $.ajax({
+                            'url':'UserServlet?method=checkPhone',
+                            'data':"phone="+value,
+                            'async':false,
+                            'dataType':"text",
+                            'success':function (res) {
+                                if(res == 'exist'){
+                                    isExist = true
+                                }
+                            }
+                        });
+                        if(isExist){//如果存在
+                            return '此手机号已使用'
+                        }
+                    }
                 });
 				//监听提交
 				form.on('submit(login)', function(data) {
