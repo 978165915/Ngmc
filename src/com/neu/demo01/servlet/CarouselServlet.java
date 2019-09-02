@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet("/CarouselServlet/*")
+@WebServlet("/CarouselServlet")
 public class CarouselServlet extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,26 +33,12 @@ public class CarouselServlet extends HttpServlet {
         HttpSession session = request.getSession ( );
         CarouselBiz carouselbiz = new CarouselBizImpl ( ); //添加
         PrintWriter out = response.getWriter ( );
-        if (method.equals ("submit")) {
-            String id = request.getParameter ("id");
-            String cardesc = request.getParameter ("carDesc");
-            String imgpath = request.getParameter ("imgpath");
-            Date date = new Date ( );
-            String createtime = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss").format (date);
-            String categoryid = request.getParameter ("categoryid");
-           /* Date date = new Date ( );
-            String createTime = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss").format (date);*/
-            //String createTime=查询  获取java系统时间 格式
-            Carousel carousel = new Carousel (cardesc, imgpath, createtime, Integer.parseInt (categoryid));
-            if (carouselbiz.save (carousel) > 0) {
-
-            }
-        } else if (method.equals ("carouselList")) { //连接列表
+        if (method.equals ("carouselList")) { //连接列表
             //获得页面当前页码page,
             int page = request.getParameter ("page") == null ? 1 : Integer.parseInt (request.getParameter ("page"));
             //获得页面页大小limit
             int limit = request.getParameter ("limit") == null ? 1 : Integer.parseInt (request.getParameter ("limit"));
-            List<Carousel> carouselsList=carouselbiz.getCarouselListByPage (page,limit);
+            List<Carousel>carouselsList= carouselbiz.getCarouselListByPage (page,limit);
             StringBuilder sb = new StringBuilder("");
             sb.append("{" +
                     "  \"code\": 0," +
@@ -63,8 +49,40 @@ public class CarouselServlet extends HttpServlet {
             sb.append(goodsListJSON);//拼接对象数组
             sb.append("}");
             out.print(sb.toString());
+        } else if (method.equals ("seve")) {
+            String id = request.getParameter ("id");
+            String cardesc = request.getParameter ("cardesc");
+            String imgpath = request.getParameter ("imgpath");
+            String dataId =request.getParameter ("dataId");
+            Date date = new Date ( );
+            String createTime = new SimpleDateFormat ("yyyy-MM-dd HH").format (date);
+            String categoryid = request.getParameter ("categoryid"); //页面请求过来的数据
+            Carousel carousel = new Carousel (Integer.parseInt (id), cardesc, imgpath, createTime, Integer.parseInt (categoryid));
+            if (carouselbiz.save (carousel) > 0) { //新增个用户
+                response.sendRedirect (request.getContextPath ( ) + "/pages/carousel/list.html");
+            } else { //失败
+                response.sendRedirect (request.getContextPath ( ) + "/pages/carousel/add.html");
+            }  if (dataId!=null&&dataId.equals ("")){
+                Carousel carousel1 =new Carousel ( Integer.parseInt (id),cardesc,imgpath,createTime,Integer.parseInt (categoryid) );
+                if (carouselbiz.update (carousel)>0){//修改操作
+
+
+
+                }
+
+            }
         }
+        else if (method.equals ("update")){   //查询一条记录
+            String id= request.getParameter ("id");
+            Carousel carousel= carouselbiz.upen (Integer.parseInt (id));
+            String  carouselJSON=JSON.toJSONStringWithDateFormat (carousel,"yyyy-MM-dd");
+            out.print (carouselJSON);
+        }
+
     }
+
+
+
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

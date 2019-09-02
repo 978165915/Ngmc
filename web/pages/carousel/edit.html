@@ -23,35 +23,30 @@
 <body>
 <div class="weadmin-body">
     <form class="layui-form" method="post"  lay-filter="example">
-        <div class="layui-form-item">
-            <label class="layui-form-label" >请输入您的用户名编号</label>
-            <div class="layui-input-inline">
-                <input type="text" name="id"  lay-verify="title" autocomplete="off" placeholder="用户名编号" class="layui-input">
-            </div>
-        </div>
+        <input type="hidden" name="dataId" id="dataId" value="" />
         <div class="layui-form-item">
             <label class="layui-form-label" >轮播广告的描述</label>
             <div class="layui-input-inline">
-                <input type="text" name="cardesc"  lay-verify="title" autocomplete="off" placeholder="轮播广告的描述" class="layui-input">
+                <input type="text" name="cardesc"  lay-verify="title" id="cardesc" autocomplete="off" placeholder="轮播广告的描述" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">轮播图路径</label>
             <div class="layui-input-inline">
-                <input type="text" name="imgpath" placeholder="轮播图路径" autocomplete="off" class="layui-input">
+                <input type="text" name="imgpath" id="imgpath" placeholder="轮播图路径" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">用户创建时间</label>
             <div class="layui-input-inline">
-                <input type="text" name="createtime" placeholder="用户创建时间" autocomplete="off" class="layui-input">
+                <input type="text" name="createtime" id="createtime" placeholder="用户创建时间" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">分类</label>
             <div class="layui-input-inline">
-                <input type="text" name="categoryid" placeholder="分类" autocomplete="off" class="layui-input">
+                <input type="text" name="categoryid"  id="categoryid" placeholder="分类" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
@@ -74,14 +69,40 @@
     layui.use(['form','layer','jquery'], function(){
         var form = layui.form,
             $=layui.jquery
-        layer = layui.layer;
+            layer = layui.layer;
+         //检测id是否为空
+         layer.alert($("#dataId").val(), {//如果id的值不是空，就是修改
+            title: 'id的值'
+        });
+         //请求ajks数据
+        if($("#dataId").val()!=""){//是修改，就要请求到全部信息
+            $.ajax({
+                "url" : '../../CarouselServlet?method=update', // 要提交的URL路径
+                "type" :  "post",// 发送请求的方式
+                "data": "id="+$("#dataId").val(),// 要发送到服务器的数据
+                "dataType" :  "JSON",// 指定传输的数据格式
+                "success": function(result) { // 请求成功后要执行的代码
+                    $("#cardesc").val(result.cardesc);
+                    $("#imgpath").val(result.imgpath);
+                    $("#createtime").val(result.createtime);
+                    $("#categoryid").val(result.categoryid);
+                },
+                "error" : function() {// 请求失败后要执行的代码
+                    layer.alert("内部发生异常", {
+                        title: '操作提示'
+                    });
+                }
+            });
+
+        }
+
 
         //监听提交
         form.on('submit(add)', function(data){
             console.log(data);
             //发异步，把数据提交给後台
-            $.ajax( {
-                url: '../../CarouselServlet?method=seve',// 要提交的URL路径
+           /* $.ajax( {
+                "url": '../../CarouselServlet?method=seve', // 要提交的URL路径
                 "type":"post", // 发送请求的方式
                 "data":  data.field, // 要发送到服务器的数据
                 "dataType":"text",// 指定传输的数据格式
@@ -99,8 +120,8 @@
                         title: '操作提示'
                     });
                 }
-            } );
-            return false; //不提交表单
+            } );*/
+            return false;
         });
     });
 </script>

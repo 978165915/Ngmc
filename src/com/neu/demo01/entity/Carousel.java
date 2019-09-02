@@ -50,7 +50,8 @@ public class Carousel {
         this.categoryid = categoryid;
     }
 
-    public Carousel( String cardesc, String imgpath, String createtime,int categoryid) {
+    public Carousel( int id ,String cardesc, String imgpath, String createtime,int categoryid) {
+        this.id =id;
         this.cardesc = cardesc;
         this.imgpath = imgpath;
         this.createtime = createtime;
