@@ -10,6 +10,8 @@ public interface OrderBiz {
     int saveOrder(Order order);
     int deleteOrder(Order order);
     int saveOrderItem(OrderItem orderItem);
+    List<Order>getOrderListByPage(int currentPage, int pageSize);
     List<Order> getOrderList();
+    int getOrderCount();
 
 }
