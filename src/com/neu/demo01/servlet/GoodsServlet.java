@@ -33,7 +33,8 @@ public class GoodsServlet extends HttpServlet {
         String method = request.getParameter("method");
         PrintWriter out=response.getWriter();
         GoodsBiz goodsBiz=new GoodsBizImpl();
-        if (method.equals("submit")){
+        if (method.equals("save")){
+            String id=request.getParameter("id");
             String name=request.getParameter("name");
             String typeid=request.getParameter("typeid");
             String imgpath=request.getParameter("imgpath");
@@ -42,11 +43,11 @@ public class GoodsServlet extends HttpServlet {
             Date date=new Date();
             String createTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
             //String createTime=查询  获取java系统时间 格式
-            Goods goods=new Goods(name,Integer.parseInt(typeid),"",price,goodsDesc, createTime);
+            Goods goods=new Goods(Integer.parseInt(id),name,Integer.parseInt(typeid),"",price,goodsDesc, createTime);
             if (goodsBiz.save(goods)>0){//新增
-                response.sendRedirect(request.getContextPath()+"/list.html");
+                response.sendRedirect(request.getContextPath()+"pages/goods/list.html");
             }else{
-                response.sendRedirect(request.getContextPath()+"/add.html");
+                response.sendRedirect(request.getContextPath()+"pages/goods/add.html");
             }
         }else if(method.equals("goodsList")){
             //获得页面当前页码page,

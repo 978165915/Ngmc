@@ -11,7 +11,8 @@ public class Goods {
     public Goods() {
     }
 
-    public Goods( String name, int typeid, String imgpath, String price, String goodsDesc, String createTime) {
+    public Goods(int i, String name, int typeid, String imgpath, String price, String goodsDesc, String createTime) {
+        this.id=id;
         this.name = name;
         this.typeid = typeid;
         this.imgpath = imgpath;
