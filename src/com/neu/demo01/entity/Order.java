@@ -1,55 +1,52 @@
 package com.neu.demo01.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Order {
-    private String title;
-    private double price;
-    private int amount;
-    private String Orno;
+    private  String orderId;
+    private String userId;
     private double total;
+    private int payType;
+    private int status;
+    private String shipName;
+    private String shipCode;
+    private String createTime;
+    private String closeTime;
+
+    private List<OrderItem> list = new ArrayList<OrderItem>();
 
     public Order(){
         super();
     }
 
-    public Order(String title, double price, int amount, String orno, double total) {
+    public Order(String orderId, String userId, double total, int payType, int status, String shipName, String shipCode, String createTime, String closeTime) {
         super();
-        this.title = title;
-        this.price = price;
-        this.amount = amount;
-        Orno = orno;
+        this.orderId = orderId;
+        this.userId = userId;
         this.total = total;
+        this.payType = payType;
+        this.status = status;
+        this.shipName = shipName;
+        this.shipCode = shipCode;
+        this.createTime = createTime;
+        this.closeTime = closeTime;
     }
 
-    public String getTitle() {
-        return title;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public double getPrice() {
-        return price;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public String getOrno() {
-        return Orno;
-    }
-
-    public void setOrno(String orno) {
-        Orno = orno;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public double getTotal() {
@@ -58,5 +55,59 @@ public class Order {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public int getPayType() {
+        return payType;
+    }
+
+    public void setPayType(int payType) {
+        this.payType = payType;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getShipName() {
+        return shipName;
+    }
+
+    public void setShipName(String shipName) {
+        this.shipName = shipName;
+    }
+
+    public String getShipCode() {
+        return shipCode;
+    }
+
+    public void setShipCode(String shipCode) {
+        this.shipCode = shipCode;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getCloseTime() {
+        return closeTime;
+    }
+
+    public void setCloseTime(String closeTime) {
+        this.closeTime = closeTime;
+    }
+    public List<OrderItem> getList() {
+        return list;
+    }
+    public void setList(List<OrderItem> list) {
+        this.list = list;
     }
 }

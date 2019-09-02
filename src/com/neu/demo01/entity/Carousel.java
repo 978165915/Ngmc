@@ -6,6 +6,7 @@ public class Carousel {
     private String cardesc;//轮播图广告描述
     private String imgpath;//轮播图路径
     private String createtime;//用户创建时间
+    private  int  categoryid; //别编号
 
 
 
@@ -41,10 +42,19 @@ public class Carousel {
         this.createtime = createtime;
     }
 
-    public Carousel( String cardesc, String imgpath, String createtime) {
+    public int getCategoryid() {
+        return categoryid;
+    }
+
+    public void setCategoryid( int categoryid ) {
+        this.categoryid = categoryid;
+    }
+
+    public Carousel( String cardesc, String imgpath, String createtime,int categoryid) {
         this.cardesc = cardesc;
         this.imgpath = imgpath;
         this.createtime = createtime;
+        this.categoryid=categoryid;
     }
     public Carousel(){
 

@@ -2,6 +2,7 @@ package com.neu.demo01.dao.impl;
 
 import com.neu.demo01.dao.OrderDao;
 import com.neu.demo01.entity.Order;
+import com.neu.demo01.entity.OrderItem;
 import com.neu.demo01.util.DBUtil;
 
 import java.sql.SQLException;
@@ -9,37 +10,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoImpl extends DBUtil implements OrderDao {
-    @Override
-    public int save(Order order) throws SQLException{
-        String sql= "insert into order(price,amount,Orno,total,title)"+
-                "value(?,?,?,?,?)";
-        return executeUpdate(sql,order.getPrice(),order.getAmount(),order.getOrno(),order.getTotal(),order.getTitle());
 
+    @Override
+    public int saveOrder(Order order) throws SQLException {
+        String sql= "insert into order(userid,total,paytype,status,shipname,shipcode,createtime,closetime)"+
+                "value(?,?,?,?,?,?,?,?)";
+        return executeUpdate(sql,order.getUserId(),order.getTotal(),order.getPayType(),order.getStatus(),order.getShipName(),order.getShipCode(),order.getCreateTime(),order.getCloseTime());
     }
 
     @Override
-    public int delete(Order order) throws SQLException {
-        String sql= "delete from order where price=?,amount=?,Orno=?,total=?title=?";
-        return executeUpdate(sql,order.getPrice(),order.getAmount(),order.getOrno(),order.getTotal(),order.getTitle());
+    public int deleteOrder(Order order) throws SQLException {
+        String sql= "delete from order where userid=?,total=?,paytype=?,status=?,shipname=?,shipcode=?,createtime=?,closetime=?";
+        return executeUpdate(sql,order.getUserId(),order.getTotal(),order.getPayType(),order.getStatus(),order.getShipName(),order.getShipCode(),order.getCreateTime(),order.getCloseTime());
+    };
 
+    @Override
+    public int saveOrderItem(OrderItem orderItem) throws SQLException {
+        return 0;
     }
 
     @Override
     public List<Order> getOrderList() throws SQLException{
         List<Order>orderList = new ArrayList<>();
-        String sql = "select price,amount,Orno,total,title from order";
+        String sql = "orderid,userid,total,paytype,status,shipname,shipcode,createtime,closetime";
         Order order;
         try {
             rs = executeQuery(sql);
             order = null;
             while(rs.next()){
                 order = new Order();
-                order.setPrice(rs.getDouble("price"));
-                order.setAmount(rs.getInt("amount"));
-                order.setOrno(rs.getString("Orno"));
+                order.setOrderId(rs.getString("orderid"));
+                order.setUserId(rs.getString("userid"));
                 order.setTotal(rs.getDouble("total"));
-                order.setTitle(rs.getString("title"));
-
+                order.setPayType(rs.getInt("paytype"));
+                order.setStatus(rs.getInt("status"));
+                order.setShipName(rs.getString("shipname"));
+                order.setShipCode(rs.getString("shipcode"));
+                order.setCreateTime(rs.getString("createtime"));
+                order.setCloseTime(rs.getString("closetime"));
                 orderList.add(order);
             }
         } finally {
