@@ -46,8 +46,8 @@ public class OrderDaoImpl extends DBUtil implements OrderDao {
                 order.setStatus(rs.getInt("status"));
                 order.setShipName(rs.getString("shipname"));
                 order.setShipCode(rs.getString("shipcode"));
-                order.setCreateTime(rs.getDate("createtime"));
-                order.setCloseTime(rs.getDate("closetime"));
+                order.setCreateTime(rs.getString("createtime"));
+                order.setCloseTime(rs.getString("closetime"));
                 orderList.add(order);
             }
         } finally {
