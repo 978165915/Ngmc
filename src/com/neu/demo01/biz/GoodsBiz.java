@@ -5,6 +5,7 @@ import com.neu.demo01.entity.Goods;
 import java.util.List;
 
 public interface GoodsBiz {
+  //新增
   int save(Goods goods);
     List<Goods> getGoodsList();
     List<Goods>getGoodsListByPage(int currentPage, int pageSize);

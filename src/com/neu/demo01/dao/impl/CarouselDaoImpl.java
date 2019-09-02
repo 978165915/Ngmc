@@ -12,34 +12,37 @@ import java.util.List;
 public class CarouselDaoImpl extends DBUtil implements CarouselDao {
     @Override
     public int save(Carousel carousel) throws SQLException {
-        String sql= "insert into carousel(`id`,`carDesc`,`imgpath`,`createtime`,`categoryid`) values ( ?, ?, ?, ?)";
-        return executeUpdate(sql,carousel.getId(),carousel.getCardesc(),carousel.getImgpath(),carousel.getCreatetime(),carousel.getCategoryid ());
+        String sql= "insert into carousel(`id`,`carDesc`,`imgpath`,`createtime`,`categoryid`)"+
+                "values(?,?,?,?,?)";
+        return executeUpdate(sql,carousel.getId (), carousel.getCardesc(),carousel.getImgpath(),carousel.getCreatetime(),carousel.getCategoryid ());
     }
 
     @Override
     public int delete(Carousel carousel) throws SQLException {
-       String sql="delete from carousel where id=?,carDesc=?,imgpath=?,createtime=?,`categoryid`=?";
+        String sql="delete from carousel where id=?,carDesc=?,imgpath=?,createtime=?,`categoryid`=?";
         return executeUpdate(sql,carousel.getId(),carousel.getCardesc(),carousel.getImgpath(),carousel.getCreatetime(),carousel.getCategoryid ()) ;
     }
 
 
 
+
+
     @Override
-    public Carousel upen(String id ) throws SQLException {
-        String sql="select id,carDeac, imgpath,createime,`categoryid` from caraouseel where  id =?";
+    public Carousel upen(int id ) throws SQLException {
+        String sql="selsct `carDesc`,`imgpath`,`createtime`,`categoryid`  from `carousel` where  id =?";
         Carousel carousel;
         try {
-        rs =  executeQuery(sql,id);
-         carousel= null;
-        if (rs.next()){
-           carousel= new Carousel();
-           carousel.setId(rs.getInt("id"));
-           carousel.setCardesc(rs.getString("cardeac"));
-           carousel.setImgpath(rs.getString("imgpath"));
-           carousel.setCreatetime(rs.getString("createime"));
-           carousel.setCategoryid (rs.getInt ("categoryid"));
+            rs =  executeQuery (sql,id);
+            carousel= null;
+            if (rs.next()){
+                carousel= new Carousel();
+                carousel.setId(rs.getInt("id"));
+                carousel.setCardesc(rs.getString("cardeac"));
+                carousel.setImgpath(rs.getString("imgpath"));
+                carousel.setCreatetime(rs.getString("createime"));
+                carousel.setCategoryid (rs.getInt ("categoryid"));
 
-        }
+            }
         }finally {
 
             closeAll(conn, pstmt, rs);
@@ -50,27 +53,27 @@ public class CarouselDaoImpl extends DBUtil implements CarouselDao {
 
     @Override
     public List<Carousel> getUpen() throws SQLException {
-      List<Carousel>carouselsList = new ArrayList <>(); //创建一个Carousel对象 List 集合，
-      String sql="select id,carDeac,imgpath ,createime ,`categoryid` form caroudel"; //查询所有条信息
-         try {
+        List<Carousel>carouselsList = new ArrayList <>(); //创建一个Carousel对象 List 集合，
+        String sql="select id,carDeac,imgpath ,createime ,`categoryid` form caroudel"; //查询所有条信息
+        try {
 
 
-      Carousel carousel;
-       rs=executeQuery(sql);
-       carousel=null;
+            Carousel carousel;
+            rs=executeQuery (sql);
+            carousel=null;
 
-       while (rs.next()){
-           carousel=new Carousel();
-           carousel.setId(rs.getInt("id"));
-           carousel.setCardesc(rs.getString("cardear"));
-           carousel.setImgpath(rs.getString("imgpath"));
-           carousel.setCreatetime(rs.getString("createime"));//查询到的每一条信息加入到carouselsList
-           carousel.setCategoryid (rs.getInt ("categoryid"));
-           carouselsList.add(carousel);
-       }
-    }finally {
-                closeAll(conn, pstmt, rs); //关闭资源
-         }
+            while (rs.next()){
+                carousel=new Carousel();
+                carousel.setId(rs.getInt("id"));
+                carousel.setCardesc(rs.getString("cardear"));
+                carousel.setImgpath(rs.getString("imgpath"));
+                carousel.setCreatetime(rs.getString("createime"));//查询到的每一条信息加入到carouselsList
+                carousel.setCategoryid (rs.getInt ("categoryid"));
+                carouselsList.add(carousel);
+            }
+        }finally {
+            closeAll(conn, pstmt, rs); //关闭资源
+        }
 
         return carouselsList;  //返回这个集合数据
     }
@@ -88,9 +91,9 @@ public class CarouselDaoImpl extends DBUtil implements CarouselDao {
             while (rs.next ( )) {
                 carousel = new Carousel ( );
                 carousel.setId (rs.getInt ("id"));
-                carousel.setCardesc (rs.getString ("cardeac"));
+                carousel.setCardesc (rs.getString ("cardesc"));
                 carousel.setImgpath (rs.getString ("imgpath"));
-                carousel.setCreatetime (rs.getString ("createime"));
+                carousel.setCreatetime (rs.getString ("createtime"));
                 carousel.setCategoryid (rs.getInt ("categoryid"));
                 carouselList.add (carousel);
             }
@@ -113,6 +116,12 @@ public class CarouselDaoImpl extends DBUtil implements CarouselDao {
             closeAll(conn,pstmt,rs);
         }
         return count;
+    }
+
+    @Override  //新增
+    public int update( Carousel carousel ) throws SQLException {
+        String sql ="update userinfo set `carDesc=?`,`imgpath=?`,`createtime=?`,`categoryid=?` where id=?";
+        return executeUpdate (carousel.getCardesc (),carousel.getImgpath (),carousel.getCreatetime (),carousel.getCategoryid (),carousel.getId ());
     }
 
 

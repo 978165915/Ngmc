@@ -1,17 +1,18 @@
 package com.neu.demo01.entity;
 
 public class Goods {
-    private int id;
-    private String name;
-    private int typeid;
-    private String imgpath;
-    private String price;
-    private String goodsDesc;
-    private String createTime;
+    private int id;//商品编号
+    private String name;//类型名称
+    private int typeid;//商品名称
+    private String imgpath;//商品图片路径
+    private String price;//商品价格
+    private String goodsDesc;//商品描述
+    private String createTime;//商品上架时间
     public Goods() {
     }
 
-    public Goods( String name, int typeid, String imgpath, String price, String goodsDesc, String createTime) {
+    public Goods(int i, String name, int typeid, String imgpath, String price, String goodsDesc, String createTime) {
+        this.id=id;
         this.name = name;
         this.typeid = typeid;
         this.imgpath = imgpath;
