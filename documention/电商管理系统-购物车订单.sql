@@ -6,8 +6,7 @@ MySQL - 5.7.13
 /*!40101 SET NAMES utf8 */;
 
 create table `shopping trolley` (
-	`goods_id` int (10),
-	`quantity` int (5),
-	`sum` int (10),
-	`join_date` varchar (600)
+	`commodity_id` int (10),
+	`number` int (10),
+	`establish_data` varchar (60)
 ); 
