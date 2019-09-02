@@ -1,6 +1,7 @@
 package com.neu.demo01.entity;
 
 public class OrderItem {
+    private int id;
     private String itemid;
     private String orderid;
     private double price;
@@ -18,6 +19,14 @@ public class OrderItem {
         this.price = price;
         this.num = num;
         this.total = total;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getItemid() {

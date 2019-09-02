@@ -119,4 +119,34 @@ public class  UserDaoImpl extends DBUtil implements UserDao {
         return false;
     }
 
+	@Override
+	public boolean isExistEmail(String email) throws SQLException {
+		String sql="select id, username, password,email, phone"
+				+ " from userinfo where email=?";
+		User user;
+		try {
+			rs = executeQuery(sql, email);
+			if (rs.next()) {
+				return true;
+			}
+		} finally {
+			closeAll(conn, pstmt, rs);
+		}
+		return false;
+	}
+	@Override
+	public boolean isExistPhone(String phone) throws SQLException {
+		String sql="select id, username, password,email, phone"
+				+ " from userinfo where phone=?";
+		User user;
+		try {
+			rs = executeQuery(sql, phone);
+			if (rs.next()) {
+				return true;
+			}
+		} finally {
+			closeAll(conn, pstmt, rs);
+		}
+		return false;
+	}
 }
