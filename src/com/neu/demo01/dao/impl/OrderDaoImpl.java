@@ -39,7 +39,7 @@ public class OrderDaoImpl extends DBUtil implements OrderDao {
             order = null;
             while(rs.next()){
                 order = new Order();
-                order.setOrderId(rs.getString("orderid"));
+                order.setOrderId(rs.getInt("orderid"));
                 order.setUserId(rs.getString("userid"));
                 order.setTotal(rs.getDouble("total"));
                 order.setPayType(rs.getInt("paytype"));
@@ -67,7 +67,7 @@ public class OrderDaoImpl extends DBUtil implements OrderDao {
             order = null;
             while(rs.next()){
                 order = new Order();
-                order.setOrderId(rs.getString("orderid"));
+                order.setOrderId(rs.getInt("orderid"));
                 order.setUserId(rs.getString("userid"));
                 order.setTotal(rs.getDouble("total"));
                 order.setPayType(rs.getInt("paytype"));
