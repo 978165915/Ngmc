@@ -18,7 +18,7 @@ public interface CarouselDao {
     List<Carousel> getUpen() throws SQLException;
     List<Carousel>getCarouselListByPage( int currentPage, int pageSize) throws SQLException; //页数
     int getCarouselsCount() throws SQLException; //查询多少条记录
-    public int update(Carousel carousel) throws SQLException; //新增
+    public int update(Carousel carousels) throws SQLException; //新增
 
 
 }

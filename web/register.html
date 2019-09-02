@@ -80,12 +80,13 @@
                         ,'密码必须6到12位，且不能出现空格'
                     ],
                     email: function(value){
-                        /*var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-                        if (reg.test(this.value)) {
+                        var email = this.value;
+                        var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+                        if(reg.test(email)){
                             return true;
-                        } else {
-                            return '邮箱格式不正确！'
-                        }*/
+                        }else{
+                            return'邮箱格式不正确';
+                        }
                         var isExist = false;
                         $.ajax({
                             'url':'UserServlet?method=checkEmail',
