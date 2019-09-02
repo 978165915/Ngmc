@@ -70,5 +70,22 @@ public class UserBizImpl implements UserBiz {
 			return false;
 		}
 	}
-
+	@Override
+	public boolean isExistEmail(String email) {
+		try {
+			return new UserDaoImpl().isExistEmail(email);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	@Override
+	public boolean isExistPhone(String phone) {
+		try {
+			return new UserDaoImpl().isExistPhone(phone);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

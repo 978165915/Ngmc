@@ -14,4 +14,6 @@ public interface UserBiz {
 	int getUserCount();
 	//检测用户名是否存在
 	public boolean isExistUserName(String username);
+	public boolean isExistEmail(String email);
+	public boolean isExistPhone(String phone);
 }
