@@ -26,19 +26,12 @@
 				<a href="javascript:;">首页</a> <a href="javascript:;">商品管理</a>
 				<a href="javascript:;"> <cite>商品管理</cite></a>
 			</span>
-			<a style="float:right" class="layui-btn" id="btn-refresh"><i class="layui-icon">&#xe9aa;</i></a>
+
 		</div>
 
 		<div class="weadmin-body">
 			<div class="layui-row">
 				<form class="layui-form layui-col-md12 we-search">
-					用户搜索：
-					<div class="layui-inline">
-						<input class="layui-input" placeholder="开始日" name="start" id="start" />
-					</div>
-					<div class="layui-inline">
-						<input class="layui-input" placeholder="截止日" name="end" id="end" />
-					</div>
 					<div class="layui-inline">
 						<input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input" />
 					</div>
@@ -54,7 +47,7 @@
 				<button class="layui-btn" onclick="WeAdminShow('添加用户','./add.html',600,400)">
 					<i class="layui-icon layui-icon-add-circle-fine"></i>添加
 				</button>
-
+				<a style="float:right" class="layui-btn" id="btn-refresh"><i class="layui-icon">&#xe9aa;</i></a>
 			</div>
 			<table class="layui-hide" id="test" lay-filter="testReload"></table>
 			<script type="text/html" id="operateTpl">
@@ -81,7 +74,7 @@
 					skin: 'line',
 					cols: [[
 						{field: 'id',title: 'ID'}
-						,{field: 'imgpath',templet:"<div><img src='../../images/{{d.imgpath}}'/></div>",title: '图片'}
+						,{field: 'imgpath',templet:"<div><img src='../../images/goods/{{d.imgpath}}'/></div>",title: '图片'}
 						,{field: 'name',title: '商品名称'}
 						,{field: 'price',title: '价格'}
 						,{field: 'typeid',title: '类型'}
