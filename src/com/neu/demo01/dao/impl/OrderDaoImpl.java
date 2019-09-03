@@ -32,7 +32,7 @@ public class OrderDaoImpl extends DBUtil implements OrderDao {
     @Override
     public List<Order> getOrderListByPage(int currentPage, int pageSize) throws SQLException {
         List<Order>orderList = new ArrayList<>();
-        String sql = "select orderid,userid,total,paytype,status,shipname,shipcode,createtime,closetime from order limit ?,?";
+        String sql = "select orderid,userid,total,paytype,status,shipname,shipcode,createtime,closetime from `order` limit ?,?";
         Order order;
         try {
             rs = rs = executeQuery(sql,(currentPage-1)*pageSize,pageSize);
