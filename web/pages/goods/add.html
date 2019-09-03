@@ -64,6 +64,7 @@
                 <label class="layui-form-label">图片</label>
                 <div class="layui-input-block">
                     <button type="button" class="layui-btn" id="goodsimg"><i class="layui-icon"></i>请选择商品图片</button>
+                    <span id="imgmsg" style="color:red"></span>
                     <input type="hidden" id="imgpath" name="imgpath"/>
                 </div>
             </div>
@@ -87,7 +88,7 @@
             //指定允许上传的文件类型
             upload.render({
                 elem: '#goodsimg'
-                ,url: '../../LayUiUpload?method='
+                ,url: '../../LayUiUpload?method=goods'
                 ,accept: 'file' //普通文件
                 ,done: function(res){
                     if(res.code==0){

@@ -34,7 +34,6 @@ public class GoodsServlet extends HttpServlet {
         PrintWriter out=response.getWriter();
         GoodsBiz goodsBiz=new GoodsBizImpl();
         if (method.equals("save")){//新增
-            String id=request.getParameter("id");
             String name=request.getParameter("name");
             String typeid=request.getParameter("typeid");
             String imgpath=request.getParameter("imgpath");
@@ -43,7 +42,7 @@ public class GoodsServlet extends HttpServlet {
             Date date=new Date();
             String createTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
             //String createTime=查询  获取java系统时间 格式
-            Goods goods=new Goods(Integer.parseInt(id),name,Integer.parseInt(typeid),"",price,goodsDesc, createTime);
+            Goods goods=new Goods(name,Integer.parseInt(typeid),imgpath,price,goodsDesc, createTime);
             if (goodsBiz.save(goods)>0){//新增成功
                 response.sendRedirect(request.getContextPath()+"pages/goods/list.html");
             }else{//新增失败

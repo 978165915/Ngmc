@@ -8,7 +8,13 @@ import java.util.List;
 public interface GoodsDao {
     //新增商品
     int save(Goods goods)throws SQLException;
+    //修改商品信息
+    int updateGoods(Goods goods)throws Exception;
+    //删除商品
+    int delGoodsById(int id)throws Exception;
+    //组合查询获取商品列表
     List<Goods> getGoodsList() throws SQLException;
     List<Goods>getGoodsListByPage(int currentPage,int pageSize) throws SQLException;
+    //查詢商品個數
     int getGoodsCount() throws SQLException;
 }
