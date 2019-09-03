@@ -51,17 +51,33 @@ layui.use(['laydate', 'jquery', 'admin'], function() {
 		});
 	}
 
-	/*用户-删除*/
-	window.member_del = function (obj, id) {
-		layer.confirm('确认要删除吗？', function(index) {
-			//发异步删除数据
-			$(obj).parents("tr").remove();
-			layer.msg('已删除!', {
-				icon: 1,
-				time: 1000
-			});
-		});
-	}
+    /*删除*/
+    window.member_del = function (obj, id,url) {
+        layer.confirm('确认要删除吗？', function(index) {
+            //发异步删除数据
+            $.ajax({
+                "url" : "../../"+url+"?method=del", // 要提交的URL路径
+                "type" :  "post",// 发送请求的方式
+                "data":  "id="+id,// 要发送到服务器的数据
+                "dataType" :  "text",// 指定传输的数据格式
+                "success": function(result) { // 请求成功后要执行的代码
+                    if(result=="success"){
+                        $(obj).parents("tr").remove();
+                        layer.msg('已删除!', {
+                            icon: 1,
+                            time: 1000
+                        });
+                    }
+                },
+                "error" : function() {// 请求失败后要执行的代码
+                    layer.alert("内部发生异常", {
+                        title: '操作提示'
+                    });
+                }
+            });
+
+        });
+    }
 
 	window.delAll = function (argument) {
 		var data = tableCheck.getData();

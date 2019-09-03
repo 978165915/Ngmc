@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private  int orderId;
-    private String userId;
-    private double total;
-    private int payType;
-    private int status;
-    private String shipName;
-    private String shipCode;
-    private String createTime;
-    private String closeTime;
+    private  int orderId;//订单编号
+    private String userId;//用户编号
+    private double total;//总价
+    private int payType;//支付类型
+    private int status;//订单状态
+    private String shipName;//物流名称
+    private String shipCode;//物流单号
+    private String createTime;//创建时间
+    private String closeTime;//关闭时间
 
     private List<OrderItem> list = new ArrayList<OrderItem>();
 
