@@ -11,9 +11,29 @@ import java.util.List;
 public class GoodsDaoImpl extends DBUtil implements GoodsDao {
     @Override
     public int save(Goods goods) throws SQLException {
-        String sql="insert into goods(`id`,`name`,`typeid`,`imgpath`,`price`,`goodsDesc`,`createTime`)"+
-                "values(?,?,?,?,?,?,?)";
-        return executeUpdate(sql,goods.getId(),goods.getName(),goods.getTypeid(),goods.getId(),goods.getPrice(),goods.getGoodsDesc(),goods.getCreateTime());
+        String sql="insert into goods(`name`,`typeid`,`imgpath`,`price`,`goodsDesc`,`createTime`)"+
+                "values(?,?,?,?,?,?)";
+        return executeUpdate(sql,goods.getName(),goods.getTypeid(),goods.getImgpath(),goods.getPrice(),goods.getGoodsDesc(),goods.getCreateTime());
+    }
+
+    @Override
+    public int updateGoods(Goods goods) throws Exception {
+        String sql="UPDATE `goods` " +
+                " SET `id`=?," +
+                "`name`=?," +
+                "`typeid`=?," +
+                "`imgpath`=?," +
+                "`price`=?" +
+                "`goodsDesc`=?" +
+                "`createTime`=?" +
+                " WHERE `id`=?" ;
+        return executeUpdate(sql,goods.getId(),goods.getName(),goods.getTypeid(),goods.getImgpath(),goods.getPrice(),goods.getGoodsDesc(),goods.getCreateTime());
+    }
+
+    @Override
+    public int delGoodsById(int id) throws Exception {
+        String sql="update goods set state=0 where id=?";
+        return executeUpdate(sql, id);
     }
 
     @Override
