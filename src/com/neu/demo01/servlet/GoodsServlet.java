@@ -64,7 +64,7 @@ public class GoodsServlet extends HttpServlet {
             sb.append(goodsListJSON);//拼接对象数组
             sb.append("}");
             out.print(sb.toString());
-        }else if(method.equals("goodsList")){
+        }else if(method.equals("goodsListIndex")){
             List<Goods> goodsList=goodsBiz.getGoodsList();
             String goodsListJSON=JSON.toJSONStringWithDateFormat(goodsList,"yyyy-MM-dd HH:mm:ss");
             out.print(goodsListJSON);
