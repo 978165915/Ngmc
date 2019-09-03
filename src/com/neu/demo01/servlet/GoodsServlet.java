@@ -64,6 +64,29 @@ public class GoodsServlet extends HttpServlet {
             sb.append(goodsListJSON);//拼接对象数组
             sb.append("}");
             out.print(sb.toString());
+        }else if(method.equals("goodsList")){
+            List<Goods> goodsList=goodsBiz.getGoodsList();
+            String goodsListJSON=JSON.toJSONStringWithDateFormat(goodsList,"yyyy-MM-dd HH:mm:ss");
+            out.print(goodsListJSON);
+        }else if(method.equals("updateGoods")){
+            String id=request.getParameter("id");
+            String name=request.getParameter("name");
+            String typeid=request.getParameter("typeid");
+            String imgpath=request.getParameter("imgpath");
+            String price=request.getParameter("price");
+            String goodsDesc=request.getParameter("goodsDesc");
+            Date date=new Date();
+            String createTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+            //String createTime=查询  获取java系统时间 格式
+            Goods goods=new Goods(name,Integer.parseInt(typeid),imgpath,price,goodsDesc, createTime);
+            goods.setId(Integer.parseInt(id));
+        }else if(method.equals("del")){
+            String id=request.getParameter("id");
+            if (goodsBiz.delGoodsById(Integer.parseInt(id))>0){
+                out.print("success");
+            }else{
+                out.print("error");
+            }
         }
     }
 
