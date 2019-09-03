@@ -66,16 +66,25 @@
 		<script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script>
 		<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 		<script>
-layui.use('table', function(){
+layui.use('table', function(){//引入table模块
   var table = layui.table
      ,$ = layui.jquery;
-  
+  //第一个实例
   var tableIns =table.render({
-		elem: '#test',
-		cellMinWidth: 80,
-		skin: 'line',
-		cols: [[
-            {type:'checkbox'}
+		elem: '#test',//指定原始表格元素选择器，指定表格元素
+        id: 'testReload',
+		cellMinWidth: 80,//全局定义常规单元格的最小宽度，
+		skin: 'line',//表格风格line行  row列 nob无边框
+        url: '../../OrderServlet?method=orderListLayui',//数据接口，请求路径
+        event: true,//开启隔行背景，隔行换色
+        page:true,//开启分页，limit：每页条数     limits【10,20,30】每条页数的选择，默认：【10,20,30,40····】
+      method:'post',//提交方式
+        done: function (res,cur,count){
+        $("table").css("width","100%");
+    },
+      limits:[5,10,15],
+		cols: [[//表头
+            {type:'checkbox'}//开启多选框 field：json对应的key值 sort：true开启排序
 			,{field: 'orderId',title: '订单编号',hide:true}
 			,{field: 'userId',title: '商品编号'}
 			,{field: 'total',title: '小计'}
@@ -84,12 +93,8 @@ layui.use('table', function(){
 			,{field: 'shipName',title: '物流名称'}
 			,{field: 'shipCode',title: '物流单号'}
 			,{field: 'createTime',title: '创建时间'}
-            ,{field: 'close',title: '关闭时间',unresize: true}
-			]],
-		url: '../../OrderServlet?method=orderListLayui',
-		id: 'testReload',
-		event: true,
-	  	page:true
+            ,{field: 'close',title: '关闭时间',toolbar: '#operateTpl',unresize: true}
+			]]
 	});
   
    // 刷新
