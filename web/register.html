@@ -80,11 +80,8 @@
                         ,'密码必须6到12位，且不能出现空格'
                     ],
                     email: function(value){
-                        var email = this.value;
                         var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-                        if(reg.test(email)){
-                            return true;
-                        }else{
+                        if(!reg.test(value)){
                             return'邮箱格式不正确';
                         }
                         var isExist = false;
@@ -104,7 +101,8 @@
                         }
                     },
                     phone: function(value){
-                        if(value.length < 11){
+                        var reg = /^1[3456789]\d{9}$/;
+                        if(!reg.test(value)){
                             return '手机格式不正确';
                         }
                         var isExist = false;
