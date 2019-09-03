@@ -25,7 +25,8 @@ public class OrderServlet extends HttpServlet {
         String method = request.getParameter("method");
         PrintWriter out=response.getWriter();
         OrderBiz orderbiz= new OrderBizImpl();
-        if (method.equals("orderListLayui")){
+        if (method.equals("orderListLayui")){//连接列表
+            //获得页面当前页码
             int page = request.getParameter ("page") == null ? 1 : Integer.parseInt (request.getParameter ("page"));
             //获得页面页大小limit
             int limit = request.getParameter ("limit") == null ? 1 : Integer.parseInt (request.getParameter ("limit"));

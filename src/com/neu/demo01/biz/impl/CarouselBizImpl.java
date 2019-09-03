@@ -77,9 +77,9 @@ public class CarouselBizImpl  implements CarouselBiz {
     }
 
     @Override     //修改
-    public int update( Carousel carousel ) {
+    public int update( Carousel carousels ) {
         try {
-            return new CarouselDaoImpl ().update (carousel);
+            return new CarouselDaoImpl ().update (carousels);
         } catch (SQLException e) {
             e.printStackTrace ( );
         }

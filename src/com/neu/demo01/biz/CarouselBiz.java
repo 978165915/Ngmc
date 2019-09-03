@@ -12,10 +12,10 @@ public interface CarouselBiz {
     Carousel upen( int id);
     //查询多条信息
     List<Carousel> getUpen();
-    //获取页码数
+    // //获取页码数
     List<Carousel>getCarouselListByPage( int currentPage, int pageSize) ;
     int getCarouselsCount() ; //获取多少条数据记录
     //修改用户
-    public int update(Carousel carousel);
+    public int update(Carousel carousels);
 
 }

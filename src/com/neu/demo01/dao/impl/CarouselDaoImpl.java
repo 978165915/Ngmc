@@ -29,19 +29,18 @@ public class CarouselDaoImpl extends DBUtil implements CarouselDao {
 
     @Override
     public Carousel upen(int id ) throws SQLException {
-        String sql="selsct `carDesc`,`imgpath`,`createtime`,`categoryid`  from `carousel` where  id =?";
+        String sql="select id,`carDesc`,`imgpath`,`createtime`,`categoryid` from `carousel` where  id =?";
         Carousel carousel;
         try {
             rs =  executeQuery (sql,id);
             carousel= null;
             if (rs.next()){
                 carousel= new Carousel();
-                carousel.setId(rs.getInt("id"));
-                carousel.setCardesc(rs.getString("cardeac"));
+                carousel.setId (rs.getInt ("id"));
+                carousel.setCardesc(rs.getString("cardesc"));
                 carousel.setImgpath(rs.getString("imgpath"));
-                carousel.setCreatetime(rs.getString("createime"));
+                carousel.setCreatetime(rs.getString("createtime"));
                 carousel.setCategoryid (rs.getInt ("categoryid"));
-
             }
         }finally {
 
@@ -120,7 +119,7 @@ public class CarouselDaoImpl extends DBUtil implements CarouselDao {
 
     @Override  //新增
     public int update( Carousel carousel ) throws SQLException {
-        String sql ="update userinfo set `carDesc=?`,`imgpath=?`,`createtime=?`,`categoryid=?` where id=?";
+        String sql ="update carousel set  id=?  carDesc=?,imgpath=?,createtime=?,categoryid=? WHERE id=?";
         return executeUpdate (carousel.getCardesc (),carousel.getImgpath (),carousel.getCreatetime (),carousel.getCategoryid (),carousel.getId ());
     }
 

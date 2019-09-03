@@ -1,12 +1,12 @@
 package com.neu.demo01.entity;
 
 public class OrderItem {
-    private int id;
-    private String itemid;
-    private String orderid;
-    private double price;
-    private int num;
-    private double total;
+    private int id;//编号
+    private String itemid;//商品编号
+    private String orderid;//订单编号
+    private double price;//单价
+    private int num;//数量
+    private double total;//总价
 
     public OrderItem(){
         super();
