@@ -19,14 +19,15 @@ public class GoodsDaoImpl extends DBUtil implements GoodsDao {
     @Override
     public int updateGoods(Goods goods) throws Exception {
         String sql="UPDATE `goods` " +
-                " SET `name`=?," +
+                " SET `id`=?," +
+                "`name`=?," +
                 "`typeid`=?," +
                 "`imgpath`=?," +
                 "`price`=?" +
                 "`goodsDesc`=?" +
                 "`createTime`=?" +
                 " WHERE `id`=?" ;
-        return executeUpdate(sql,goods.getId(),goods.getName(),goods.getTypeid(),goods.getId(),goods.getPrice(),goods.getGoodsDesc(),goods.getCreateTime());
+        return executeUpdate(sql,goods.getId(),goods.getName(),goods.getTypeid(),goods.getImgpath(),goods.getPrice(),goods.getGoodsDesc(),goods.getCreateTime());
     }
 
     @Override
