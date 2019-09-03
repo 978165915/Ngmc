@@ -72,7 +72,7 @@
                 {type: 'checkbox'}
                 ,{field: 'id',title: 'ID'}
                 ,{field: 'cardesc',title: '轮播广告描述'}
-                ,{field: 'imgpath',title: '轮播图路径'}
+                ,{field: 'imgpath',templet:"<div><img src='../../images/carousel/{{d.imgpath}}'/></div>",title: '图片'}
                 ,{field: 'createtime',title: '用户创建时间'}
                 ,{field: 'categoryid',title: '类别编号'}
                 ,{field: 'operate',title: '操作',toolbar: '#operateTpl',unresize: true}
