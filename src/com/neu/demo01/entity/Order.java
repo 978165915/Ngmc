@@ -34,7 +34,7 @@ public class Order {
         this.user = user;
     }
 
-    private List<OrderItem> list = new ArrayList<OrderItem>();
+
 
     public Order(){
         super();
@@ -124,10 +124,5 @@ public class Order {
     public void setCloseTime(String closeTime) {
         this.closeTime = closeTime;
     }
-    public List<OrderItem> getList() {
-        return list;
-    }
-    public void setList(List<OrderItem> list) {
-        this.list = list;
-    }
+
 }
