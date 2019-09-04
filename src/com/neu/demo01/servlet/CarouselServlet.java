@@ -54,27 +54,17 @@ public class CarouselServlet extends HttpServlet {
             String id = request.getParameter ("id");
             String cardesc = request.getParameter ("cardesc");
             String imgpath = request.getParameter ("imgpath");
-            String dataId =request.getParameter ("id");
             Date date = new Date ( );
             String createTime = new SimpleDateFormat ("yyyy-MM-dd HH").format (date);
             String categoryid = request.getParameter ("categoryid"); //页面请求过来的数据
-            if (dataId!=null&&!dataId.equals ("")){ //修改
-                Carousel carousel = new Carousel (Integer.parseInt (id), cardesc, imgpath, createTime, Integer.parseInt (categoryid));
-                if (carouselbiz.update (carousel)>0){
-                    response.sendRedirect (request.getContextPath ( ) + "/pages/carousel/list.html");
-                }else {
-                    response.sendRedirect (request.getContextPath ( ) + "/pages/carousel/edit.html");
-                }
-            }else {
-                Carousel carousel = new Carousel (Integer.parseInt (id), cardesc, imgpath, createTime, Integer.parseInt (categoryid));
-                if (carouselbiz.save (carousel) > 0) { //新增个用户
-                    response.sendRedirect (request.getContextPath ( ) + "/pages/carousel/list.html");
-                } else { //失败
-                    response.sendRedirect (request.getContextPath ( ) + "/pages/carousel/add.html");
-                }
+            Carousel carousel = new Carousel (Integer.parseInt (id), cardesc, imgpath, createTime, Integer.parseInt (categoryid));
+            if (carouselbiz.save (carousel) > 0) { //新增个用户
+                response.sendRedirect (request.getContextPath ( ) + "/pages/carousel/list.html");
+            } else { //失败
+                response.sendRedirect (request.getContextPath ( ) + "/pages/carousel/add.html");
             }
 
-        }  else if (method.equals ("upen")){   //查询一条记录
+        }  else if (method.equals ("upen")){//查询一条记录
             String id= request.getParameter ("id");
             Carousel carousel= carouselbiz.upen (Integer.parseInt (id));
             String  carouselJSON=JSON.toJSONStringWithDateFormat (carousel,"yyyy-MM-dd");
@@ -83,7 +73,7 @@ public class CarouselServlet extends HttpServlet {
 
 
 
-        }
+    }
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

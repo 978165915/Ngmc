@@ -57,7 +57,9 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">图片</label>
             <div class="layui-input-block">
-                <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>请选择商品图片</button>
+                <button type="button" class="layui-btn" id="carouselimg"><i class="layui-icon"></i>请选择商品图片</button>
+                <span id="imgmsg" style="color:red"></span>
+                <input type="hidden" id="imgpath" name="imgpath"/>
             </div>
         </div>
 
@@ -71,10 +73,27 @@
 </div>
 <script src="../../lib/layui/layui.js" charset="utf-8"></script>
 <script>
-    layui.use(['form','layer','jquery'], function(){
+    layui.use(['form','layer','jquery','upload'], function(){
         var form = layui.form,
-            $=layui.jquery
-        layer = layui.layer;
+            $=layui.jquery,
+            layer = layui.layer,
+            upload = layui.upload,
+            upload = layui.upload;
+        //指定允许上传的文件类型
+        upload.render({
+            elem: '#carouselimg'
+            ,url: '../../LayUiUpload?method=carousel'
+            ,accept: 'file' //普通文件
+            ,done: function(res){
+                if(res.code==0){
+                    document.getElementById("imgmsg").innerHTML="上传成功";
+                    document.getElementById("imgpath").value=res.imgpathv;
+                }else{
+                    document.getElementById("imgmsg").innerHTML="上传失败";
+                }
+
+            }
+        });
 
         //监听提交
         form.on('submit(add)', function(data){

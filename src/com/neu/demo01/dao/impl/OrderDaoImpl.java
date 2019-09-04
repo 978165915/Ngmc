@@ -19,12 +19,6 @@ public class OrderDaoImpl extends DBUtil implements OrderDao {
     }
 
     @Override
-    public int deleteOrder(Order order) throws SQLException {
-        String sql= "delete from order where orderid=? userid=?,total=?,paytype=?,status=?,shipname=?,shipcode=?,createtime=?,closetime=?";
-        return executeUpdate(sql,order.getOrderId(),order.getUserId(),order.getTotal(),order.getPayType(),order.getStatus(),order.getShipName(),order.getShipCode(),order.getCreateTime(),order.getCloseTime());
-    };
-
-    @Override
     public int saveOrderItem(OrderItem orderItem) throws SQLException {
         return 0;
     }

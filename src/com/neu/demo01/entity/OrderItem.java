@@ -8,6 +8,16 @@ public class OrderItem {
     private int num;//数量
     private double total;//总价
 
+    private Order order;
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
     public OrderItem(){
         super();
     }

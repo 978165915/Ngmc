@@ -21,16 +21,6 @@ public class OrderBizImpl implements OrderBiz {
     }
 
     @Override
-    public int deleteOrder(Order order) {
-        try {
-            return new OrderDaoImpl().deleteOrder(order);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }
-
-    @Override
     public int saveOrderItem(OrderItem orderItem) {
         return 0;
     }

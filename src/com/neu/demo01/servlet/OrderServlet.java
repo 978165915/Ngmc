@@ -35,8 +35,8 @@ public class OrderServlet extends HttpServlet {
             sb.append("{" +
                     "  \"code\": 0," +
                     "  \"msg\": \"\"," +
-                    "  \"count\": "+orderbiz.getOrderCount()+"," +
-                    "  \"data\":"
+                    "  \"count\": "+orderbiz.getOrderCount()+"," +//总行数
+                    "  \"data\":"//表格数据
             );
             String orderListJSON=JSON.toJSONStringWithDateFormat(orderList,"yyyy-MM-dd HH:mm:ss");
             sb.append(orderListJSON);//拼接对象数组
