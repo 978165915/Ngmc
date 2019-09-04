@@ -42,6 +42,10 @@ public class OrderServlet extends HttpServlet {
             sb.append(orderListJSON);//拼接对象数组
             sb.append("}");
             out.print(sb.toString());
+        }else if(method.equals("orderList")){
+            List<Order> orderList = orderbiz.getOrderList();
+            String orderListJSON = JSON.toJSONStringWithDateFormat(orderList,"yyyy-MM-dd HH:mm:ss");
+            out.print(orderListJSON);
         }
 
     }

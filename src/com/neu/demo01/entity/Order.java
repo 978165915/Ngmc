@@ -14,6 +14,16 @@ public class Order {
     private String createTime;//创建时间
     private String closeTime;//关闭时间
 
+    private List<OrderItem> orderItems;
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
     private  User user;
 
     public User getUser() {

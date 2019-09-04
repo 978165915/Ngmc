@@ -54,11 +54,10 @@ public class OrderDaoImpl extends DBUtil implements OrderDao {
     @Override
     public List<Order> getOrderList() throws SQLException{
         List<Order>orderList = new ArrayList<>();
-        String sql = "select orderid,userid,total,paytype,status,shipname,shipcode,createtime,closetime from order";
-        Order order;
+        String sql = "select orderid,userid,total,paytype,status,shipname,shipcode,createtime,closetime from `order`";
+        Order order=null;
         try {
             rs = executeQuery(sql);
-            order = null;
             while(rs.next()){
                 order = new Order();
                 order.setOrderId(rs.getInt("orderid"));

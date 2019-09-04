@@ -2,11 +2,30 @@ package com.neu.demo01.entity;
 
 public class OrderItem {
     private int id;//编号
-    private String itemid;//商品编号
-    private String orderid;//订单编号
+    private int itemid;//商品编号
+    private int orderid;//订单编号
     private double price;//单价
     private int num;//数量
     private double total;//总价
+
+    private String  goodsname;
+    private String goodsimg;
+
+    public String getGoodsname() {
+        return goodsname;
+    }
+
+    public void setGoodsname(String goodsname) {
+        this.goodsname = goodsname;
+    }
+
+    public String getGoodsimg() {
+        return goodsimg;
+    }
+
+    public void setGoodsimg(String goodsimg) {
+        this.goodsimg = goodsimg;
+    }
 
     private Order order;
 
@@ -22,7 +41,7 @@ public class OrderItem {
         super();
     }
 
-    public OrderItem(String itemid, String orderid, double price, int num, double total) {
+    public OrderItem(int itemid, int orderid, double price, int num, double total) {
         super();
         this.itemid = itemid;
         this.orderid = orderid;
@@ -39,19 +58,19 @@ public class OrderItem {
         this.id = id;
     }
 
-    public String getItemid() {
+    public int getItemid() {
         return itemid;
     }
 
-    public void setItemid(String itemid) {
+    public void setItemid(int itemid) {
         this.itemid = itemid;
     }
 
-    public String getOrderid() {
+    public int getOrderid() {
         return orderid;
     }
 
-    public void setOrderid(String orderid) {
+    public void setOrderid(int orderid) {
         this.orderid = orderid;
     }
 
