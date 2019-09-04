@@ -17,7 +17,7 @@ public class GoodsDaoImpl extends DBUtil implements GoodsDao {
     }
 
     @Override
-    public int updateGoods(Goods goods) throws Exception {
+    public int update(Goods goods,int id) throws Exception {
         String sql="UPDATE `goods` " +
                 " SET `id`=?," +
                 "`name`=?," +
@@ -27,13 +27,38 @@ public class GoodsDaoImpl extends DBUtil implements GoodsDao {
                 "`goodsDesc`=?" +
                 "`createTime`=?" +
                 " WHERE `id`=?" ;
-        return executeUpdate(sql,goods.getId(),goods.getName(),goods.getTypeid(),goods.getImgpath(),goods.getPrice(),goods.getGoodsDesc(),goods.getCreateTime());
+        return executeUpdate(sql,goods.getId(),goods.getName(),goods.getTypeid(),goods.getImgpath(),goods.getPrice(),goods.getGoodsDesc(),goods.getCreateTime(),id);
     }
 
     @Override
     public int delGoodsById(int id) throws Exception {
         String sql="update goods set state=0 where id=?";
         return executeUpdate(sql, id);
+    }
+
+    @Override
+    public Goods GoodsList(int id) throws Exception {
+        String sql = "select `id`,`name`,`typeid`,`imgpath`,`price`,`goodsDesc`,`createTime`"
+                + "from Goods"
+                + " WHERE `id`=?";
+        Goods goods;
+        try {
+            rs = executeQuery(sql, id);
+            goods = null;
+            while (rs.next()) {
+                goods = new Goods();
+                goods.setId(rs.getInt("id"));
+                goods.setName(rs.getString("name"));
+                goods.setTypeid(rs.getInt("typeid"));
+                goods.setImgpath(rs.getString("imgpath"));
+                goods.setPrice(rs.getString("price"));
+                goods.setGoodsDesc(rs.getString("goodsDesc"));
+                goods.setCreateTime(rs.getString("createTime"));
+            }
+        } finally {
+            closeAll(conn, pstmt, rs);
+        }
+        return goods;
     }
 
     @Override

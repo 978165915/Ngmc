@@ -21,10 +21,6 @@ import java.util.List;
 public class GoodsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public GoodsServlet() {
-        super();
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
@@ -34,6 +30,7 @@ public class GoodsServlet extends HttpServlet {
         PrintWriter out=response.getWriter();
         GoodsBiz goodsBiz=new GoodsBizImpl();
         if (method.equals("save")){//新增
+            String dataId = request.getParameter ("id");
             String name=request.getParameter("name");
             String typeid=request.getParameter("typeid");
             String imgpath=request.getParameter("imgpath");
@@ -41,14 +38,30 @@ public class GoodsServlet extends HttpServlet {
             String goodsDesc=request.getParameter("goodsDesc");
             Date date=new Date();
             String createTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+
             //String createTime=查询  获取java系统时间 格式
-            Goods goods=new Goods(name,Integer.parseInt(typeid),imgpath,price,goodsDesc, createTime);
-            if (goodsBiz.save(goods)>0){//新增成功
-                response.sendRedirect(request.getContextPath()+"pages/goods/list.html");
-            }else{//新增失败
-                response.sendRedirect(request.getContextPath()+"pages/goods/add.html");
+            if(dataId!=null&&!dataId.equals("")){
+                Goods goods=new Goods(name,Integer.parseInt(typeid),imgpath,price,goodsDesc, createTime);
+                int update=goodsBiz.update(goods, Integer.parseInt(dataId));
+                if (update>0){//修改成功
+                    response.sendRedirect(request.getContextPath()+"pages/goods/list.html");
+                }else{//修改失败
+                    response.sendRedirect(request.getContextPath()+"pages/goods/edit.html");
+                }
+            }else{
+                Goods goods=new Goods(name,Integer.parseInt(typeid),imgpath,price,goodsDesc, createTime);
+                if (goodsBiz.save(goods)>0){//新增成功
+                    response.sendRedirect(request.getContextPath()+"pages/goods/list.html");
+                }else{//新增失败
+                    response.sendRedirect(request.getContextPath()+"pages/goods/add.html");
+                }
             }
-        }else if(method.equals("goodsList")){
+        }  else if (method.equals ("GoodsList")){   //查询一条记录
+            int id= Integer.parseInt(request.getParameter ("id"));
+            Goods goods=new GoodsBizImpl().GoodsList(id);
+            String  goodsJSON=JSON.toJSONStringWithDateFormat (goods,"yyyy-MM-dd");
+            out.print(goodsJSON);
+        } else if(method.equals("goodsList")){
             //获得页面当前页码page,
             int page=request.getParameter("page")==null?1:Integer.parseInt(request.getParameter("page"));
             //获得页面页大小limit
@@ -68,18 +81,6 @@ public class GoodsServlet extends HttpServlet {
             List<Goods> goodsList=goodsBiz.getGoodsList();
             String goodsListJSON=JSON.toJSONStringWithDateFormat(goodsList,"yyyy-MM-dd HH:mm:ss");
             out.print(goodsListJSON);
-        }else if(method.equals("updateGoods")){
-            String id=request.getParameter("id");
-            String name=request.getParameter("name");
-            String typeid=request.getParameter("typeid");
-            String imgpath=request.getParameter("imgpath");
-            String price=request.getParameter("price");
-            String goodsDesc=request.getParameter("goodsDesc");
-            Date date=new Date();
-            String createTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
-            //String createTime=查询  获取java系统时间 格式
-            Goods goods=new Goods(name,Integer.parseInt(typeid),imgpath,price,goodsDesc, createTime);
-            goods.setId(Integer.parseInt(id));
         }else if(method.equals("del")){
             String id=request.getParameter("id");
             if (goodsBiz.delGoodsById(Integer.parseInt(id))>0){
