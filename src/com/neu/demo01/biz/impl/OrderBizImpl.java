@@ -2,6 +2,7 @@ package com.neu.demo01.biz.impl;
 
 import com.neu.demo01.biz.OrderBiz;
 import com.neu.demo01.dao.impl.OrderDaoImpl;
+import com.neu.demo01.dao.impl.OrderDetailDaoImpl;
 import com.neu.demo01.entity.Order;
 import com.neu.demo01.entity.OrderItem;
 
@@ -38,7 +39,13 @@ public class OrderBizImpl implements OrderBiz {
     @Override
     public List<Order> getOrderList() {
         try {
-            return new OrderDaoImpl().getOrderList();
+            List<Order> orderList = new OrderDaoImpl().getOrderList();
+            //装载订单对应的商品项列表
+            for (int i = 0; i <orderList.size() ; i++) {
+                Order o = orderList.get(i);
+                o.setOrderItems(new OrderDetailDaoImpl().getItemsByOrderId(o.getOrderId()));
+            }
+            return orderList;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

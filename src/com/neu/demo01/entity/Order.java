@@ -14,6 +14,16 @@ public class Order {
     private String createTime;//创建时间
     private String closeTime;//关闭时间
 
+    private List<OrderItem> orderItems;
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
     private  User user;
 
     public User getUser() {
@@ -24,7 +34,7 @@ public class Order {
         this.user = user;
     }
 
-    private List<OrderItem> list = new ArrayList<OrderItem>();
+
 
     public Order(){
         super();
@@ -114,10 +124,5 @@ public class Order {
     public void setCloseTime(String closeTime) {
         this.closeTime = closeTime;
     }
-    public List<OrderItem> getList() {
-        return list;
-    }
-    public void setList(List<OrderItem> list) {
-        this.list = list;
-    }
+
 }
