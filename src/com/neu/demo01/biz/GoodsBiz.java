@@ -8,7 +8,7 @@ public interface GoodsBiz {
   //新增
   int save(Goods goods);
   //修改
-  int update(Goods goods,int id);
+  int update(Goods goods);
   //删除
   int delGoodsById(int id);
   Goods GoodsList(int id);

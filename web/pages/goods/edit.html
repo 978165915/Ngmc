@@ -95,6 +95,8 @@
                     $("#imgpath").val(result.imgpath);
                     $("#price").val(result.price);
                     $("#goodsDesc").val(result.goodsDesc);
+                    loadType(result.typeid);
+                   // $('#demo1').attr('src', result);
                 },
                 "error": function () {// 请求失败后要执行的代码
                     layer.alert("内部发生异常", {
@@ -102,7 +104,23 @@
                     });
                 }
             });
+            function loadType(typeid_value) {
+                $("#typeid").empty();
+                $("#typeid").append("<option value='0'>请选择商品类型</option>");
+                $.get('../../GoodsTypeServlet', 'method=typeList', function (res) {
+                    $(res).each(function (i,item) {
+                        if(typeid_value==item.id){
+                            $("#typeid").append("<option selected value='"+item.id+"'>"+item.typename+"</option>");
+                        }else{
+                            $("#typeid").append("<option value='"+item.id+"'>"+item.typename+"</option>");
+                        }
+
+                    });
+                    form.render();//重新重组form组件
+                }, 'JSON');
+            }
         }
+
         //监听提交
         form.on('submit(add)', function(data){
             console.log(data);

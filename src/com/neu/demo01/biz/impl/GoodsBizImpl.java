@@ -21,9 +21,9 @@ public class GoodsBizImpl implements GoodsBiz {
     }
 
     @Override
-    public int update(Goods goods,int id) {
+    public int update(Goods goods) {
         try {
-            return new GoodsDaoImpl().update(goods,id);
+            return new GoodsDaoImpl().update(goods);
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
