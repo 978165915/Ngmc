@@ -16,6 +16,6 @@ public interface CarouselBiz {
     List<Carousel>getCarouselListByPage( int currentPage, int pageSize) ;
     int getCarouselsCount() ; //获取多少条数据记录
     //修改用户
-    public int update(Carousel carousels);
+    public int update(Carousel carousel);
 
 }
