@@ -12,15 +12,15 @@ import java.util.List;
 public class CarouselDaoImpl extends DBUtil implements CarouselDao {
     @Override
     public int save(Carousel carousel) throws SQLException {
-        String sql= "insert into carousel(`id`,`carDesc`,`imgpath`,`createtime`,`categoryid`)"+
-                "values(?,?,?,?,?)";
-        return executeUpdate(sql,carousel.getId (), carousel.getCardesc(),carousel.getImgpath(),carousel.getCreatetime(),carousel.getCategoryid ());
+        String sql= "insert into carousel(`carDesc`,`imgpath`,`createtime`,`categoryid`)"+
+                "values(?,?,?,?)";
+        return executeUpdate(sql, carousel.getCardesc(),carousel.getImgpath(),carousel.getCreatetime(),carousel.getCategoryid ());
     }
 
     @Override
     public int delete(Carousel carousel) throws SQLException {
-        String sql="delete from carousel where id=?,carDesc=?,imgpath=?,createtime=?,`categoryid`=?";
-        return executeUpdate(sql,carousel.getId(),carousel.getCardesc(),carousel.getImgpath(),carousel.getCreatetime(),carousel.getCategoryid ()) ;
+        String sql="delete from carousel where id=?";
+        return executeUpdate(sql,carousel.getId()) ;
     }
 
 
@@ -53,7 +53,7 @@ public class CarouselDaoImpl extends DBUtil implements CarouselDao {
     @Override
     public List<Carousel> getUpen() throws SQLException {
         List<Carousel>carouselsList = new ArrayList <>(); //创建一个Carousel对象 List 集合，
-        String sql="select id,carDeac,imgpath ,createime ,`categoryid` form caroudel"; //查询所有条信息
+        String sql="select id,carDeac,imgpath ,createtime ,`categoryid` form caroudel order by createtime"; //查询所有条信息
         try {
 
 
@@ -66,7 +66,7 @@ public class CarouselDaoImpl extends DBUtil implements CarouselDao {
                 carousel.setId(rs.getInt("id"));
                 carousel.setCardesc(rs.getString("cardear"));
                 carousel.setImgpath(rs.getString("imgpath"));
-                carousel.setCreatetime(rs.getString("createime"));//查询到的每一条信息加入到carouselsList
+                carousel.setCreatetime(rs.getString("createtime"));//查询到的每一条信息加入到carouselsList
                 carousel.setCategoryid (rs.getInt ("categoryid"));
                 carouselsList.add(carousel);
             }
@@ -81,7 +81,7 @@ public class CarouselDaoImpl extends DBUtil implements CarouselDao {
     public List <Carousel> getCarouselListByPage( int currentPage, int pageSize ) throws SQLException {
         List<Carousel>carouselList=new ArrayList <> ();
         String sql="select `id`,`carDesc`,`imgpath`,`createtime`,`categoryid`"
-                +"from carousel limit ?,?";
+                +"from carousel order by createtime limit ?,?";
         try {
 
 
@@ -117,10 +117,12 @@ public class CarouselDaoImpl extends DBUtil implements CarouselDao {
         return count;
     }
 
+
+
     @Override  //新增
     public int update( Carousel carousel ) throws SQLException {
-        String sql ="update carousel set  id=?  carDesc=?,imgpath=?,createtime=?,categoryid=? WHERE id=?";
-        return executeUpdate (carousel.getCardesc (),carousel.getImgpath (),carousel.getCreatetime (),carousel.getCategoryid (),carousel.getId ());
+        String sql ="UPDATE `carousel` SET  carDesc=?,imgpath=?,categoryid=? WHERE id=?";
+        return executeUpdate (sql,carousel.getCardesc (),carousel.getImgpath (),carousel.getCategoryid (),carousel.getId ());
     }
 
 
