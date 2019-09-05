@@ -19,11 +19,6 @@ public class OrderDaoImpl extends DBUtil implements OrderDao {
     }
 
     @Override
-    public int saveOrderItem(OrderItem orderItem) throws SQLException {
-        return 0;
-    }
-
-    @Override
     public List<Order> getOrderListByPage(int currentPage, int pageSize) throws SQLException {
         List<Order>orderList = new ArrayList<>();
         String sql = "select orderid,userid,total,paytype,status,shipname,shipcode,createtime,closetime from `order` limit ?,?";
