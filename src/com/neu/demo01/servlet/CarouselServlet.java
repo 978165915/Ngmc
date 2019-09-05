@@ -82,6 +82,14 @@ public class CarouselServlet extends HttpServlet {
                 String  carouselJSON=JSON.toJSONStringWithDateFormat (carousel,"yyyy-MM-dd");
                 out.print (carouselJSON);
         }
+          else if (method.equals ("del")){
+            String dataId =request.getParameter ("id");
+            if (carouselbiz.delete (Integer.parseInt (dataId))>0){
+                out.print("success");
+            }else{
+                out.print("error");
+            }
+        }
 
         }
 

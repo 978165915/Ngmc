@@ -7,7 +7,7 @@ public interface CarouselBiz {
     //新增一个轮播对象
     int save(Carousel carousel) ;
     //删除一个对象
-    int delete(Carousel carousels);
+    int delete(int id);
     //根据用户名查询一条记录
     Carousel upen( int id);
     //查询多条信息
