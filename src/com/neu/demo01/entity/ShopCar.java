@@ -15,15 +15,11 @@ public class ShopCar {
 //
     public ShopCar(){};
 
-    public ShopCar(int id, int goods_id, int num, int user_id, String create_date, String name,String imgpach,double price){
-        this.id = id;
+    public ShopCar(int goods_id, int num, int user_id, String create_date){
         this.goods_id = goods_id;
         this.num = num;
         this.user_id = user_id;
         this.create_date = create_date;
-        this.name = name;
-        this.imgpach = imgpach;
-        this.price = price;
     }
 
     public int getId() {
