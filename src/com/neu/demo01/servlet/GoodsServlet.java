@@ -30,7 +30,7 @@ public class GoodsServlet extends HttpServlet {
         PrintWriter out=response.getWriter();
         GoodsBiz goodsBiz=new GoodsBizImpl();
         if (method.equals("save")){//新增
-            String dataId = request.getParameter ("id");
+            String dataId = request.getParameter ("dataId");
             String name=request.getParameter("name");
             String typeid=request.getParameter("typeid");
             String imgpath=request.getParameter("imgpath");
@@ -42,7 +42,8 @@ public class GoodsServlet extends HttpServlet {
             //String createTime=查询  获取java系统时间 格式
             if(dataId!=null&&!dataId.equals("")){
                 Goods goods=new Goods(name,Integer.parseInt(typeid),imgpath,price,goodsDesc, createTime);
-                int update=goodsBiz.update(goods, Integer.parseInt(dataId));
+                goods.setId(Integer.parseInt(dataId));
+                int update=goodsBiz.update(goods);
                 if (update>0){//修改成功
                     response.sendRedirect(request.getContextPath()+"pages/goods/list.html");
                 }else{//修改失败

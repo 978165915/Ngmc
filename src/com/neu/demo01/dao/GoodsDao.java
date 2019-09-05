@@ -9,7 +9,7 @@ public interface GoodsDao {
     //新增商品
     int save(Goods goods)throws SQLException;
     //修改商品信息
-    int update(Goods goods,int id)throws Exception;
+    int update(Goods goods)throws Exception;
     //删除商品
     int delGoodsById(int id)throws Exception;
     //查询一条
