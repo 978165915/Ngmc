@@ -22,11 +22,6 @@ public class OrderBizImpl implements OrderBiz {
     }
 
     @Override
-    public int saveOrderItem(OrderItem orderItem) {
-        return 0;
-    }
-
-    @Override
     public List<Order> getOrderListByPage(int currentPage, int pageSize) {
         try {
             return new OrderDaoImpl().getOrderListByPage(currentPage, pageSize);

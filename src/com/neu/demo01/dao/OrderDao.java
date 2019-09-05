@@ -9,7 +9,7 @@ import java.util.List;
 public interface OrderDao {
     //新增
     int saveOrder(Order order) throws SQLException;
-    int saveOrderItem(OrderItem orderItem)throws SQLException;
+
     //页数
     List<Order>getOrderListByPage(int currentPage, int pageSize) throws SQLException;
     //订单表
