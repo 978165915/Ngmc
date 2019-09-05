@@ -2,6 +2,8 @@ package com.neu.demo01.biz.impl;
 
 import com.neu.demo01.biz.CarouselBiz;
 import com.neu.demo01.dao.impl.CarouselDaoImpl;
+import com.neu.demo01.dao.impl.GoodsDaoImpl;
+import com.neu.demo01.dao.impl.GoodsTypeDaoImpl;
 import com.neu.demo01.entity.Carousel;
 
 import java.sql.SQLException;
@@ -22,9 +24,9 @@ public class CarouselBizImpl  implements CarouselBiz {
 
 
     @Override   //删除
-    public int delete(Carousel carousel)  {
+    public int delete(int id)  {
         try {
-            return new CarouselDaoImpl().delete(carousel);
+            return new CarouselDaoImpl().delete(id);
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
@@ -54,7 +56,12 @@ public class CarouselBizImpl  implements CarouselBiz {
     @Override  //页码数
     public List <Carousel> getCarouselListByPage( int currentPage, int pageSize ) {
         try {
-            return new CarouselDaoImpl().getCarouselListByPage (currentPage,pageSize);
+            List<Carousel> carouselList=new CarouselDaoImpl ().getCarouselListByPage (currentPage,pageSize);
+            for (int i=0;i<carouselList.size ();i++){
+                Carousel carousel=carouselList.get (i);
+                carousel.setGoodsType (new GoodsTypeDaoImpl ().getGoodsTypeById (carousel.getCategoryid ()));
+            }
+            return carouselList;
 
         }catch (SQLException e ){
             e.printStackTrace();
@@ -79,6 +86,7 @@ public class CarouselBizImpl  implements CarouselBiz {
     @Override     //修改
     public int update( Carousel carousels  ) {
         try {
+
             return new CarouselDaoImpl ().update (carousels);
         } catch (SQLException e) {
             e.printStackTrace ( );

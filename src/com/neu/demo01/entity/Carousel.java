@@ -7,6 +7,7 @@ public class Carousel {
     private String imgpath;//轮播图路径
     private String createtime;//用户创建时间
     private int categoryid; //别编号
+    private  GoodsType goodsType;
     public int getId() {
         return id;
     }
@@ -56,5 +57,13 @@ public class Carousel {
 
     public Carousel() {
 
+    }
+
+    public GoodsType getGoodsType() {
+        return goodsType;
+    }
+
+    public void setGoodsType( GoodsType goodsType ) {
+        this.goodsType = goodsType;
     }
 }

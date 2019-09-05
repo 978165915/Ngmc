@@ -18,9 +18,9 @@ public class CarouselDaoImpl extends DBUtil implements CarouselDao {
     }
 
     @Override
-    public int delete(Carousel carousel) throws SQLException {
+    public int delete(int id) throws SQLException {
         String sql="delete from carousel where id=?";
-        return executeUpdate(sql,carousel.getId()) ;
+        return executeUpdate(sql,id) ;
     }
 
 
@@ -119,7 +119,7 @@ public class CarouselDaoImpl extends DBUtil implements CarouselDao {
 
 
 
-    @Override  //新增
+    @Override  //修改
     public int update( Carousel carousel ) throws SQLException {
         String sql ="UPDATE `carousel` SET  carDesc=?,imgpath=?,categoryid=? WHERE id=?";
         return executeUpdate (sql,carousel.getCardesc (),carousel.getImgpath (),carousel.getCategoryid (),carousel.getId ());

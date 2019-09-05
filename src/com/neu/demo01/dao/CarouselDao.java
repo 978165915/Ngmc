@@ -11,7 +11,7 @@ public interface CarouselDao {
     //新增一个轮播对象
     int save(Carousel carousel) throws SQLException;
     //删除一个对象
-    int delete(Carousel carousel) throws  SQLException;
+    int delete(int id) throws  SQLException;
     //根据用户名查询一条记录
     Carousel upen( int id) throws SQLException;
     //   //查询多条信息
