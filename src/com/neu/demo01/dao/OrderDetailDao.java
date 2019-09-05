@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface OrderDetailDao {
     List<OrderItem> getItemsByOrderId(int id) throws SQLException;
+    int saveOrderItem(OrderItem orderItem)throws SQLException;
 }

@@ -6,15 +6,12 @@ public class Carousel {
     private String cardesc;//轮播图广告描述
     private String imgpath;//轮播图路径
     private String createtime;//用户创建时间
-    private  int  categoryid; //别编号
-
-
-
+    private int categoryid; //别编号
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId( int id ) {
         this.id = id;
     }
 
@@ -22,7 +19,7 @@ public class Carousel {
         return cardesc;
     }
 
-    public void setCardesc(String cardesc) {
+    public void setCardesc( String cardesc ) {
         this.cardesc = cardesc;
     }
 
@@ -30,7 +27,7 @@ public class Carousel {
         return imgpath;
     }
 
-    public void setImgpath(String imgpath) {
+    public void setImgpath( String imgpath ) {
         this.imgpath = imgpath;
     }
 
@@ -38,7 +35,7 @@ public class Carousel {
         return createtime;
     }
 
-    public void setCreatetime(String createtime) {
+    public void setCreatetime( String createtime ) {
         this.createtime = createtime;
     }
 
@@ -50,15 +47,14 @@ public class Carousel {
         this.categoryid = categoryid;
     }
 
-    public Carousel( int id ,String cardesc, String imgpath, String createtime,int categoryid) {
-        this.id =id;
+    public Carousel(  String cardesc, String imgpath, String createtime, int categoryid ) {
         this.cardesc = cardesc;
         this.imgpath = imgpath;
         this.createtime = createtime;
-        this.categoryid=categoryid;
-    }
-    public Carousel(){
-
+        this.categoryid = categoryid;
     }
 
+    public Carousel() {
+
+    }
 }

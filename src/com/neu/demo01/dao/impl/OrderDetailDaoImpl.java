@@ -31,4 +31,11 @@ public class OrderDetailDaoImpl extends DBUtil implements OrderDetailDao {
         }
         return orderItems;
     }
+
+    @Override
+    public int saveOrderItem(OrderItem orderItem) throws SQLException {
+        String sql= "insert into `order_goods_detail`(itemid，orderid,price，num,total)"+
+                "value(?,?,?,?,?,?,?,?)";
+        return executeUpdate(sql, orderItem.getItemid(),orderItem.getOrderid(),orderItem.getPrice(),orderItem.getTotal());
+    }
 }
