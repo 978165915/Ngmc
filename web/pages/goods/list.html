@@ -33,7 +33,7 @@
 			<div class="layui-row">
 				<form class="layui-form layui-col-md12 we-search">
 					<div class="layui-inline">
-						<input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input" />
+						<input type="text" name="username" placeholder="请输入商品名称" autocomplete="off" class="layui-input" />
 					</div>
 					<button class="layui-btn" lay-submit="" lay-filter="sreach">
 						<i class="layui-icon layui-icon-search"></i>
@@ -44,14 +44,14 @@
 				<button class="layui-btn layui-btn-danger" onclick="delAll()">
 					<i class="layui-icon layui-icon-delete"></i>批量删除
 				</button>
-				<button class="layui-btn" onclick="WeAdminShow('添加用户','./add.html',800,600)">
+				<button class="layui-btn" onclick="WeAdminShow('添加商品','./add.html',800,460)">
 					<i class="layui-icon layui-icon-add-circle-fine"></i>添加
 				</button>
 				<a style="float:right" class="layui-btn" id="btn-refresh"><i class="layui-icon">&#xe9aa;</i></a>
 			</div>
 			<table class="layui-hide" id="test" lay-filter="testReload"></table>
 			<script type="text/html" id="operateTpl">
-				<a title="编辑" onclick="WeAdminEdit('编辑','./edit.html', {{d.id}}, 800, 600)" href="javascript:;">
+				<a title="编辑" onclick="WeAdminEdit('编辑','./edit.html', {{d.id}}, 800, 460)" href="javascript:;">
 					<i class="layui-icon">&#xe642;</i>
 				</a>
 				<a title="删除" onclick="member_del(this,{{d.id}},'GoodsServlet')" href="javascript:;">
