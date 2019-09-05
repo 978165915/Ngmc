@@ -19,7 +19,7 @@
 		<div class="weadmin-nav">
 			<span class="layui-breadcrumb">
 				<a href="javascript:;">首页</a> <a href="javascript:;">用户管理</a>
-				<a href="javascript:;"> <cite>订单列表</cite></a>
+				<a href="javascript:;"> <cite>订单详细表列表</cite></a>
 			</span>
 			<a style="float:right" class="layui-btn" id="btn-refresh"><i class="layui-icon">&#xe9aa;</i></a>
 		</div>
@@ -53,10 +53,10 @@
 			</div>
 			<table class="layui-hide" id="test" lay-filter="testReload"></table>
 			<script type="text/html" id="operateTpl">
-				<a title="编辑" onclick="WeAdminEdit('编辑','./edit.html', 2, 600, 400)" href="javascript:;">
+				<a title="查看" onclick="WeAdminEdit('查看','./show.html', {{d.id}}, 600, 400)" href="javascript:;">
 					<i class="layui-icon">&#xe642;</i>
 				</a>
-				<a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+				<a title="删除" onclick="member_del(this,{{d.id}},'OrderServlet')" href="javascript:;">
 					<i class="layui-icon">&#xe640;</i>
 				</a>
 			</script>
@@ -82,19 +82,16 @@ layui.use('table', function(){//引入table模块
         done: function (res,cur,count){
         $("table").css("width","100%");
     },
-      limits:[5,10,15],
+      //limits:[5,10,15],
 		cols: [[//表头
             {type:'checkbox'}//开启多选框 field：json对应的key值 sort：true开启排序
-			,{field: 'orderId',title: '订单编号'}
-			,{field: 'userId',title: '商品编号'}
-			,{field: 'total',title: '小计'}
-			,{field: 'payType',title: '支付类型'}
-			,{field: 'status',title: '订单类型'}
-			,{field: 'shipName',title: '物流名称'}
-			,{field: 'shipCode',title: '物流单号'}
-			,{field: 'createTime',title: '创建时间'}
-            ,{field: 'cTime',title: '关闭时间'}lose
-            ,{field: 'close',title: '关闭时间',toolbar: '#operateTpl',unresize: true}
+            ,{field: 'id',title: '编号'}
+            ,{field: 'itemid',title: '商品编号'}
+			,{field: 'orderid',title: '订单编号'}
+			,{field: 'price',title: '单价'}
+			,{field: 'num',title: '数量'}
+            ,{field: 'total',title: '总价'}
+            ,{field: 'close',title: '操作',toolbar: '#operateTpl',unresize: true}
 			]]
 	});
   
