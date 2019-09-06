@@ -63,7 +63,7 @@ public class UserServlet extends HttpServlet {
 			User user =	new User(username,pwd,email,phone);
 
 			if(userbiz.register(user)>0) {//登录成功
-				response.sendRedirect(request.getContextPath()+"/admin.html");
+				response.sendRedirect(request.getContextPath()+"/login.html");
 			}else {//登录失败
 				response.sendRedirect(request.getContextPath()+"/register.html");
 			}

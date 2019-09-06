@@ -24,8 +24,10 @@ public class ShopCarDaoImpl extends DBUtil implements ShopCarDao{
     @Override
     public List<ShopCar> getShopCarList() throws SQLException {
         List<ShopCar>shopCarList=new ArrayList<>();
-        String sql="id, goods_id, num, userid,create_date"
-                + " from shopping_car";
+        String sql="SELECT sc.id, sc.goods_id, sc.num, sc.userid,sc.create_date," +
+                "g.`name`,g.`imgpath` ,g.`price`" +
+                " FROM shopping_car sc,goods g" +
+                " WHERE sc.`goods_id`=g.id";
         ShopCar shopCar;
         try {
             rs = executeQuery(sql);
@@ -37,6 +39,9 @@ public class ShopCarDaoImpl extends DBUtil implements ShopCarDao{
                 shopCar.setNum(rs.getInt("num"));;
                 shopCar.setUser_id(rs.getInt("userid"));
                 shopCar.setCreate_date(rs.getString("create_date"));
+                shopCar.setName(rs.getString("name"));
+                shopCar.setPrice(rs.getDouble("price"));
+                shopCar.setImgpach(rs.getString("imgpath"));
                 shopCarList.add(shopCar);
             }
         } finally {
@@ -58,6 +63,14 @@ public class ShopCarDaoImpl extends DBUtil implements ShopCarDao{
             closeAll(conn,pstmt,rs);
         }
         return count;
+    }
+
+    @Override
+    public int updateShopCar(int goodsId, int num) throws SQLException {
+        String sql = "UPDATE `shopping_car` " +
+                "SET num = num +(?) " +
+                "WHERE  goods_id= ?";
+        return executeUpdate(sql,num,goodsId);
     }
 
 

@@ -2,7 +2,7 @@
 SQLyog v10.2 
 MySQL - 5.7.13 : Database - electronic_emporium
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -110,7 +110,7 @@ CREATE TABLE `order` (
   PRIMARY KEY (`orderid`),
   KEY `user_id` (`userid`),
   CONSTRAINT `user_id` FOREIGN KEY (`userid`) REFERENCES `userinfo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `order` */
 
@@ -118,11 +118,6 @@ insert  into `order`(`orderid`,`userid`,`total`,`paytype`,`status`,`shipname`,`s
 insert  into `order`(`orderid`,`userid`,`total`,`paytype`,`status`,`shipname`,`shipcode`,`createtime`,`closetime`) values (2,2,'35',1,2,'顺丰','46464','2019-09-11 15:15:29',NULL);
 insert  into `order`(`orderid`,`userid`,`total`,`paytype`,`status`,`shipname`,`shipcode`,`createtime`,`closetime`) values (3,3,'689',2,2,'中通','498645468','2019-09-12 15:16:11',NULL);
 insert  into `order`(`orderid`,`userid`,`total`,`paytype`,`status`,`shipname`,`shipcode`,`createtime`,`closetime`) values (4,4,'525',3,1,'百世','4684546','2019-09-18 15:18:17',NULL);
-insert  into `order`(`orderid`,`userid`,`total`,`paytype`,`status`,`shipname`,`shipcode`,`createtime`,`closetime`) values (5,5,'37224',1,2,'德邦','46546','2019-09-20 15:18:26','2019-09-28 15:19:45');
-insert  into `order`(`orderid`,`userid`,`total`,`paytype`,`status`,`shipname`,`shipcode`,`createtime`,`closetime`) values (6,6,'27242',2,3,'申通','5465435','2019-09-12 15:18:48','2019-09-13 15:19:49');
-insert  into `order`(`orderid`,`userid`,`total`,`paytype`,`status`,`shipname`,`shipcode`,`createtime`,`closetime`) values (7,7,'65465465',3,4,'圆通','46456','2019-09-07 15:18:53',NULL);
-insert  into `order`(`orderid`,`userid`,`total`,`paytype`,`status`,`shipname`,`shipcode`,`createtime`,`closetime`) values (8,8,'51145',1,2,'韵达','416541518','2019-09-30 15:18:57',NULL);
-insert  into `order`(`orderid`,`userid`,`total`,`paytype`,`status`,`shipname`,`shipcode`,`createtime`,`closetime`) values (9,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `order_goods_detail` */
 
@@ -145,12 +140,12 @@ CREATE TABLE `order_goods_detail` (
 
 /*Data for the table `order_goods_detail` */
 
-insert  into `order_goods_detail`(`id`,`itemid`,`orderid`,`price`,`num`,`total`) values (1,1,1,NULL,NULL,NULL);
-insert  into `order_goods_detail`(`id`,`itemid`,`orderid`,`price`,`num`,`total`) values (2,2,1,NULL,NULL,NULL);
-insert  into `order_goods_detail`(`id`,`itemid`,`orderid`,`price`,`num`,`total`) values (3,3,1,NULL,NULL,NULL);
-insert  into `order_goods_detail`(`id`,`itemid`,`orderid`,`price`,`num`,`total`) values (4,2,2,NULL,NULL,NULL);
-insert  into `order_goods_detail`(`id`,`itemid`,`orderid`,`price`,`num`,`total`) values (5,3,2,NULL,NULL,NULL);
-insert  into `order_goods_detail`(`id`,`itemid`,`orderid`,`price`,`num`,`total`) values (6,4,2,NULL,NULL,NULL);
+insert  into `order_goods_detail`(`id`,`itemid`,`orderid`,`price`,`num`,`total`) values (1,1,1,'1000',1,'1000');
+insert  into `order_goods_detail`(`id`,`itemid`,`orderid`,`price`,`num`,`total`) values (2,2,1,'1000',1,'1000');
+insert  into `order_goods_detail`(`id`,`itemid`,`orderid`,`price`,`num`,`total`) values (3,3,3,'1000',1,'1000');
+insert  into `order_goods_detail`(`id`,`itemid`,`orderid`,`price`,`num`,`total`) values (4,2,2,'1000',1,'1000');
+insert  into `order_goods_detail`(`id`,`itemid`,`orderid`,`price`,`num`,`total`) values (5,3,2,'1000',1,'1000');
+insert  into `order_goods_detail`(`id`,`itemid`,`orderid`,`price`,`num`,`total`) values (6,4,4,'1000',1,'1000');
 
 /*Table structure for table `shopping_car` */
 
@@ -167,9 +162,37 @@ CREATE TABLE `shopping_car` (
   KEY `shopcar_userid_FK` (`userid`),
   CONSTRAINT `shopcar_goodsid_FK` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`),
   CONSTRAINT `shopcar_userid_FK` FOREIGN KEY (`userid`) REFERENCES `userinfo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `shopping_car` */
+
+insert  into `shopping_car`(`id`,`goods_id`,`num`,`userid`,`create_date`) values (1,14,1,1,'2019-09-06 11:01:09');
+insert  into `shopping_car`(`id`,`goods_id`,`num`,`userid`,`create_date`) values (2,13,1,1,'2019-09-06 11:01:10');
+insert  into `shopping_car`(`id`,`goods_id`,`num`,`userid`,`create_date`) values (3,15,1,1,'2019-09-06 11:01:11');
+insert  into `shopping_car`(`id`,`goods_id`,`num`,`userid`,`create_date`) values (4,3,1,1,'2019-09-06 11:01:21');
+insert  into `shopping_car`(`id`,`goods_id`,`num`,`userid`,`create_date`) values (5,2,2,1,'2019-09-06 11:01:31');
+
+/*Table structure for table `user_address` */
+
+DROP TABLE IF EXISTS `user_address`;
+
+CREATE TABLE `user_address` (
+  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `userId` int(255) DEFAULT NULL COMMENT '用户主键',
+  `address` varchar(255) DEFAULT NULL COMMENT '地址',
+  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  `isDefault` int(2) DEFAULT '0' COMMENT '是否是默认地址（1:是 0否）',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+/*Data for the table `user_address` */
+
+insert  into `user_address`(`id`,`userId`,`address`,`createTime`,`isDefault`,`remark`) values (11,2,'北京市海淀区大有庄',NULL,0,'朋友家');
+insert  into `user_address`(`id`,`userId`,`address`,`createTime`,`isDefault`,`remark`) values (12,2,'北京市海淀区大有庄',NULL,0,'女朋友公司');
+insert  into `user_address`(`id`,`userId`,`address`,`createTime`,`isDefault`,`remark`) values (13,9,'北京市西直门大桥芬兰国际大厦',NULL,0,'女朋友地址');
+insert  into `user_address`(`id`,`userId`,`address`,`createTime`,`isDefault`,`remark`) values (14,18,'北京市花园路小区',NULL,0,'家里');
+insert  into `user_address`(`id`,`userId`,`address`,`createTime`,`isDefault`,`remark`) values (15,18,'北京市海淀区成府路',NULL,0,'公司');
 
 /*Table structure for table `userinfo` */
 

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+<meta name="keywords" content="通通，通通电商，网上购物，网上商城，数码产品，手机，笔记本，相机，手表">
+<meta name="description" content="便捷的网上购物平台">
+
+        <title>购物车 - 通通电商平台</title>
+    <link href="./css/common.css" rel="stylesheet"><link href="./css/cart.css" rel="stylesheet"></head>
+    <body>
+
+        <div class="header">
+    <div class="w">
+        <a class="jdlogo" href="./index.html"></a>
+        <div class="search-con">
+            <input class="search-input" id="search-input" placeholder="请输入商品名称"/>
+            <button class="btn search-btn" id="search-btn">搜索</button>
+        </div>
+    </div>
+</div>
+        <div class="crumb">
+            <div class="w">
+                <div class="crumb-con">
+                    <a class="link" href="./index.html">通通</a>
+                    <span>></span>
+                    <span class="link-text">购物车</span>
+                </div>
+            </div>
+        </div>
+        <div class="cart-wrap w"> 
+            <div class="cart-header"> 
+                <table class="cart-table"> 
+                    <tbody>
+                        <tr>
+                            <th class="cart-cell cell-check"> 
+                                <label>  
+                                    <input type="checkbox" class="cart-select-all">
+                                    <span>全选</span> 
+                                </label> 
+                            </th> 
+                            <th class="cart-cell cell-info">商品信息</th> 
+                            <th class="cart-cell cell-price">单价</th> 
+                            <th class="cart-cell cell-count">数量</th> 
+                            <th class="cart-cell cell-total">合计</th> 
+                            <th class="cart-cell cell-opera">操作</th> 
+                        </tr> 
+                    </tbody>
+                </table> 
+            </div> 
+            <div class="cart-list">  
+                <table class="cart-table" data-product-id="107" data-checked="1"> 
+                    <tbody>
+
+                    </tbody>
+                </table>  
+            </div> 
+            <div class="cart-footer clear"> 
+                <div class="select-con"> 
+                    <label>  
+                        <input type="checkbox" class="cart-select-all">
+                        <span>全选</span> 
+                    </label> 
+                </div> 
+                <div class="delete-con"> 
+                    <a class="cart-delete-seleced link"> 
+                        <i class="fa fa-trash-o" aria-hidden="true"></i> 
+                        <span>删除选中</span> 
+                    </a> 
+                </div> 
+                <div class="submit-con">
+                    <span>已选商品 <span id="selectGoodsCount">0</span> 件</span>
+                    <span>总价：</span> <span class="submit-total">￥<span id="selectGoodsMoney">0.00</span></span>
+                    <span class="btn submit-btn submitDis">去结算</span>
+                </div> 
+            </div>  
+        </div>
+        <div class="footer">
+    <div class="w">
+        <div class="slogen">
+                <div class="item-con">
+                    <p class="img-duo"></p>
+                    <p class="item-txt">品类齐全，轻松购物</p>
+                </div>
+                <div class="item-con">
+                    <p class="img-kuai"></p>
+                    <p class="item-txt">多仓直发，极速配送</p>
+                </div>
+                 <div class="item-con">
+                    <p class="img-hao"></p>
+                    <p class="item-txt">正品行货，精致服务</p>
+                </div>
+                <div class="item-con">
+                    <p class="img-sheng"></p>
+                    <p class="item-txt">天天低价，畅选无忧</p>
+                </div>
+        </div>
+       <div class="copyright">
+            <p >
+            Copyright © 2018 TT.COM All Right Reserved
+            </p>
+       </div>
+    </div>
+
+</div>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+        <script src="js/decimal.js" type="text/javascript" charset="utf-8"></script>
+        <!--<script type="text/javascript" src="./js/base.js">--></script><script type="text/javascript" src="./js/cart.js"></script>
+    </body>
+</html>
