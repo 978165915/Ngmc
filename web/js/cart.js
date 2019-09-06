@@ -46,7 +46,7 @@ $.get('../../ShopCarServlet','method=shopCarList',function (res) {
 },'JSON');
 function loadGoods(goodsList) {
     $.each(goodsList, function(i, item) {
-        var goodsHtml = '<tr class="goods-item"> ' +
+        var goodsHtml = '<tr class="goods-item" title="'+item.goods_id+'"> ' +
             '                            <td class="cart-cell cell-check">  ' +
             '                                <input type="checkbox" class="cart-select">   ' +
             '                            </td> ' +
@@ -91,6 +91,11 @@ function ShoppingCarObserver(elInput, isAdd) {
         var goodsTotalCount = parseInt($('#selectGoodsCount').text())
         if(this.elInput) {
             if(this.isAdd) {
+                $.get('../ShopCarServlet','method=saveOrUpdate&goodsId='+this.parents.attr('title')+'&c_num=1',function (res) {
+                    if(res!="update_success"){
+                        return
+                    }
+                },'text');
                 ++this.count
                 if(isChecked) {
                     $('#selectGoodsMoney').empty().append(toDecimal2(GoodsTotalMoney + this.singlePrice))
@@ -100,6 +105,11 @@ function ShoppingCarObserver(elInput, isAdd) {
                 if(parseInt(this.count) <= 1) {
                     return
                 } else {
+                    $.get('../ShopCarServlet','method=saveOrUpdate&goodsId='+this.parents.attr('title')+'&c_num=-1',function (res) {
+                        if(res!="update_success"){
+                            return
+                        }
+                    },'text');
                     --this.count
                     if(isChecked) {
                         $('#selectGoodsMoney').empty().append(toDecimal2(GoodsTotalMoney - this.singlePrice))
@@ -110,6 +120,7 @@ function ShoppingCarObserver(elInput, isAdd) {
             this.elInput.val(this.count)
         }
     }
+
     this.checkIsAll = function() {
         var checkLen = $('.cart-select:checked').length
         if (checkLen > 0) {
@@ -222,7 +233,7 @@ $('.cart-list tbody').on('click', '.cart-delete', function() {
     }
 })
 
-$(document).on('click','.cart-delete', function() {
+$(document).on('click','.delete-con .cart-delete-seleced', function() {
     if($('.cart-select:checked').length > 0) {
         for (var i = 0; i < $('.cart-select:checked').length; i++) {
             var multyDelete = new ShoppingCarObserver($('.cart-select:checked').eq(i), null)
