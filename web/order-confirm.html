@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="通通，通通电商，网上购物，网上商城，数码产品，手机，笔记本，相机，手表">
+    <meta name="description" content="便捷的网上购物平台">
+
+    <title>订单确认 - 通通电商平台</title>
+    <link href="./css/common.css" rel="stylesheet"><link href="./css/order-confirm.css" rel="stylesheet"></head>
+<body>
+
+<div class="header">
+    <div class="w">
+        <a class="jdlogo" href="./index.html"></a>
+        <div class="search-con">
+            <input class="search-input" id="search-input" placeholder="请输入商品名称"/>
+            <button class="btn search-btn" id="search-btn">搜索</button>
+        </div>
+    </div>
+</div>
+<div class="crumb">
+    <div class="w">
+        <div class="crumb-con">
+            <a class="link" href="./index.html">通通</a>
+            <span>></span>
+            <span class="link-text">订单确认</span>
+        </div>
+    </div>
+</div>
+<div class="confirm-wrap w">
+    <div class="panel">
+        <h2 class="panel-title">收货地址</h2>
+        <div class="panel-body address-list">   <a class="address-item" data-id="8716">  <div class="address-title"> <span class="city">沈阳 辽宁省</span> <span class="name">（ 张三 收 ）</span> </div> <div class="address-detail"> 浑南新区新秀街 123456789012 </div> <div class="address-opera"> <span class="link address-update">编辑</span> <span class="link address-delete">删除</span> </div> </a>    <a class="address-item" data-id="8717">  <div class="address-title"> <span class="city">北京 北京</span> <span class="name">（ 李四 收 ）</span> </div> <div class="address-detail"> 北京市朝阳区XXX街道 123456789012 </div> <div class="address-opera"> <span class="link address-update">编辑</span> <span class="link address-delete">删除</span> </div> </a>  <div class="address-item add"> <div class="address-new"> <i class="fa fa-plus"></i> <div class="text">使用新地址</div> </div> </div></div>
+    </div>
+    <div class="panel">
+        <h2 class="panel-title">商品清单</h2>
+        <div class="panel-body order-product">
+            <table class="product-table" data-product-id="" data-checked="">
+                <tbody>
+                <tr>
+                    <th width="10%">&nbsp;</th>
+                    <th width="30%" align="left">商品描述</th>
+                    <th width="20%" align="center">价格</th>
+                    <th width="20%" align="center">数量</th>
+                    <th width="20%" align="center">小计</th>
+                </tr>
+                <tr>
+                    <td class="product-cell cell-img">
+                        <a href="./detail.html?productId=107" target="_blank">
+                            <img class="p-img" src="./images/goods/2018110101.jpg">
+                        </a>
+                    </td>
+                    <td align="left">
+                        <a class="link p-name" href="./detail.html?productId=107" target="_blank">索尼（SONY）KD-65X8566E 65英寸4K HDR腾讯视频 安卓7.0智能液晶电视（黑色）</a>
+                    </td>
+                    <td align="center">￥2799</td>
+                    <td align="center">x1</td>
+                    <td align="center">￥2799</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="submit-con">
+                <span>订单总价：</span>
+                <span class="submit-total">￥2799</span>
+                <span class="btn order-submit">提交订单</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="w">
+        <div class="slogen">
+            <div class="item-con">
+                <p class="img-duo"></p>
+                <p class="item-txt">品类齐全，轻松购物</p>
+            </div>
+            <div class="item-con">
+                <p class="img-kuai"></p>
+                <p class="item-txt">多仓直发，极速配送</p>
+            </div>
+            <div class="item-con">
+                <p class="img-hao"></p>
+                <p class="item-txt">正品行货，精致服务</p>
+            </div>
+            <div class="item-con">
+                <p class="img-sheng"></p>
+                <p class="item-txt">天天低价，畅选无忧</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p >
+                Copyright © 2018 TT.COM All Right Reserved
+            </p>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="./js/base.js"></script><script type="text/javascript" src="./js/order-confirm.js"></script></body>
+</html>
