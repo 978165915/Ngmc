@@ -93,6 +93,7 @@
                 "success": function (result) { // 请求成功后要执行的代码
                     $("#name").val(result.name);
                     $("#typeid").val(result.typeid);
+                    $("#imgpath").val(result.imgpath);
                     $('#demo1').attr('src', '../../images/goods/'+result.imgpath);
                     $("#price").val(result.price);
                     $("#goodsDesc").val(result.goodsDesc);
