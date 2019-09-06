@@ -60,7 +60,7 @@ public class GoodsServlet extends HttpServlet {
         }  else if (method.equals ("GoodsList")){   //查询一条记录
             int id= Integer.parseInt(request.getParameter ("id"));
             Goods goods=new GoodsBizImpl().GoodsList(id);
-            String  goodsJSON=JSON.toJSONStringWithDateFormat (goods,"yyyy-MM-dd");
+            String  goodsJSON=JSON.toJSONStringWithDateFormat (goods,"yyyy-MM-dd HH:mm:ss");
             out.print(goodsJSON);
         } else if(method.equals("goodsList")){
             //获得页面当前页码page,
@@ -79,7 +79,8 @@ public class GoodsServlet extends HttpServlet {
             sb.append("}");
             out.print(sb.toString());
         }else if(method.equals("goodsListIndex")){
-            List<Goods> goodsList=goodsBiz.getGoodsList();
+            int count  = goodsBiz.getGoodsCount();
+            List<Goods> goodsList=goodsBiz.getGoodsListByPage(1,count/3*3);
             String goodsListJSON=JSON.toJSONStringWithDateFormat(goodsList,"yyyy-MM-dd HH:mm:ss");
             out.print(goodsListJSON);
         }else if(method.equals("del")){
