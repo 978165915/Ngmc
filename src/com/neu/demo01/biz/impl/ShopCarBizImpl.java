@@ -40,5 +40,15 @@ public class ShopCarBizImpl implements ShopCarBiz {
         }
     }
 
+    @Override
+    public int updateShopCar(int goodsId, int num) {
+        try {
+            return new ShopCarDaoImpl().updateShopCar(goodsId,num);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 
 }

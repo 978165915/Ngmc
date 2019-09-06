@@ -49,7 +49,7 @@ $(function(){
                 var $caption=$("<div class='caption'></div>");
                 var $h3=$("<h3>"+res[i].name+"</h3>");
                 var $p1=$("<p>"+res[i].goodsDesc+"</p>");
-                var $p2=$("<p><a href='#' id='addShopCar' title='"+res[i].id+"' class='btn btn-danger' role='button'>添加到购物>></a></p>");
+                var $p2=$("<p><a  id='addShopCar' title='"+res[i].id+"' class='btn btn-danger' role='button'>添加到购物>></a></p>");
                 $caption.append($h3);
                 $caption.append($p1);
                 $caption.append($p2);
@@ -68,8 +68,8 @@ $(function(){
     },'text')
     $(document).on('click','#addShopCar',function () {
         // alert($(this).attr('title'));
-        $.get('../ShopCarServlet','method=saveOrUpdate&'+$(this).attr('title'),function (res) {
-            $(".car-num").text(parseInt($(".car-num").text())+1);
+        $.get('../ShopCarServlet','method=saveOrUpdate&goodsId='+$(this).attr('title')+'&c_num=1',function (res) {
+            if(res=="add_success")$(".car-num").text(parseInt($(".car-num").text())+1);
         },'text')
     })
 });

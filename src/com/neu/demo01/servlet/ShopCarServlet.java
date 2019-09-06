@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +27,7 @@ import com.neu.demo01.entity.User;
 public class ShopCarServlet extends HttpServlet {
      static final long serialVersionUID = 1L;
 
+    ShopCarBiz shopCarbiz = new ShopCarBizImpl();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,21 +46,42 @@ public class ShopCarServlet extends HttpServlet {
         HttpSession session=request.getSession();
         String method = request.getParameter("method");
         PrintWriter out=response.getWriter();
-        ShopCarBiz shopCarbiz = new ShopCarBizImpl();
-        if (method.equals("userList")){
+        if (method.equals("shopCarList")){
             List<ShopCar> shopCarsList=shopCarbiz.getShopCarList();
             String userListJSON=JSON.toJSONStringWithDateFormat(shopCarsList,"yyyy-MM-dd HH:mm:ss");
             out.print(userListJSON);
-        }else if(method.equals("save")){
-             int goods_id=request.getParameter("goods_id")==null?0:Integer.parseInt(request.getParameter("goods_id"));//商品ID
-             int num=request.getParameter("num")==null?0:Integer.parseInt(request.getParameter("num"));//购买数量
-             int user_id=request.getParameter("user_id")==null?0:Integer.parseInt(request.getParameter("user_id"));//用户ID
-             String create_date=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());//创建时间
-            ShopCar shopCar = new ShopCar(goods_id,num,user_id,create_date);
-            if (shopCarbiz.save(shopCar)>0){
-                out.print("success");
+        }else if(method.equals("saveOrUpdate")){
+            String goodsId = request.getParameter("goodsId");
+            if(goodsId!=null&&!goodsId.equals("")) {
+                Map<Integer, ShopCar> shopCarMap = (Map<Integer, ShopCar>) session.getAttribute("shopCarMap");
+                if(shopCarMap.containsKey(Integer.parseInt(goodsId))) {//如果有此商品，就修改数量
+                        int num = Integer.parseInt(request.getParameter("c_num"));
+                    if (shopCarbiz.updateShopCar(Integer.parseInt(goodsId),num)>0){
+                        loadShopCarList(session);
+                        out.print("update_success");
+                    }
+                }else {//如果没有此商品，就新增一条
+                    String create_date=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());//创建时间
+                    ShopCar shopCar = new ShopCar(Integer.parseInt(goodsId),1,1,create_date);
+                    if (shopCarbiz.save(shopCar)>0){
+                        loadShopCarList(session);
+                        out.print("add_success");
+                    }
+                }
             }
+        }else if(method.equals("carNum")){
+            loadShopCarList(session);
+            out.print(shopCarbiz.getShopCarCount());
         }
+
+    }
+    private void loadShopCarList(HttpSession session){
+        Map<Integer,ShopCar> shopCarMap = new HashMap<>();
+        List<ShopCar> shopCarsList=shopCarbiz.getShopCarList();
+        for (ShopCar shopCar:shopCarsList){
+            shopCarMap.put(shopCar.getGoods_id(),shopCar);
+        }
+        session.setAttribute("shopCarMap",shopCarMap);
     }
 
     /**
